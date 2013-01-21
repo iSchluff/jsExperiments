@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-		<meta charset="UTF-8" />
-        <title>Sidescrolling Navigation</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-        <meta name="author" content="Anton Schubert" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <script src="scripts/main.js"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-        <!--<script src="scripts/zepto.min.js"></script>-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Sidescrolling Navigation</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="author" content="Anton Schubert" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="scripts/main.js"></script>
+		<script src="scripts/hAnimate.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+		<!--<script src="scripts/zepto.min.js"></script>-->
     </head>
-    <body onload="init();">     
-        <div id="views">
-			<div class="view" id="view1">
-				<div class="button" id="rightBtn">Rechts</div>
-				<div class="button" id="leftBtn">Links</div>
-				<div class="button" id="addRows">add 300 divs</div>
-        	</div>        
+    <body onload="init();">   
+			<article>
+				<header>
+					Header
+				</header>
+				<div id="parent"></div>
+				<footer>
+					Footer
+				</footer>
+			</article>
+			<div id="views">
+				<div class="view" id="view1">
+					<div class="button addBtn">add divs</div>
+        </div>        
         
-        	<div class="view" id="view2">
-				<p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
-        	</div>
-        </div>
+        <div class="view" id="view2">
+					<p>You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'? Why don't they know? If they don't know, that means we never told anyone. And if we never told anyone it means we never made it back. Hence we die down here. Just as a matter of deductive logic. </p>
+				</div>
+      </div>
     </body>
 </html>
