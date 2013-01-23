@@ -1,0 +1,63 @@
+html, body, div, span, h1, h2, p, a, img,
+figure, footer, header, section, ul {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, section {
+	display: block;
+}
+
+body{
+	/*background: #eae9e9;*/
+	background: url(bg.png);
+}
+
+#main{
+	margin: 100px auto 100px auto;
+	width: 800px;
+}
+
+#canvas{
+	border: 1px solid darkgrey;
+}
+
+#list{
+	list-style-type: none;
+	padding: 0 auto;
+	background: #fff;
+}
+
+#list li{
+	float:left;
+	font-size: 1.5em;
+	font-family:  Arial, sans;
+	padding: 5px 30px;
+	margin: 0 10px 20px 10px;
+	background: #fff;
+	border: solid 1px #eee;
+	
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+#list li:first-child{
+	margin-left:0;
+}
+
+#list li:hover{
+	cursor: pointer;
+	background: #f8f8f8;
+	-webkit-box-shadow: inset 1px 1px 4px -1px rgba(0, 0, 0, 0.3);   
+    box-shadow: inset 1px 1px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
