@@ -1,0 +1,78 @@
+html, body, div, span, h1, h2, p, a, img,
+figure, footer, header, section {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, section {
+	display: block;
+}
+
+body {
+	background: #eae9e9;
+}
+
+#main {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	-moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.container { 
+  width: 700px;
+  height: 700px;
+	position: relative;
+	margin: 200px auto auto auto;
+  
+  -moz-perspective: 1000px;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  /*border: 1px solid black;*/
+}
+
+.square{
+	position:absolute;
+	width:50px;
+	height:50px;
+	
+	-webkit-transform: translateZ( 0px );
+	-moz-transform: translateZ( 0px );
+	transform: translateZ( 0px );
+	
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	
+	-webkit-text-stroke: #aaaaaa 1px; /* Fix chrome font rendering */
+	color: #aaaaaa;
+	border: 1px solid #eae9e9;
+	background: #666666;
+	
+	text-align:center;
+	font-size: 5em;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.hovered{
+	/*-webkit-transform: rotateX( 180deg );*/
+	/*background: #ffffff !important;*/
+	-webkit-transform: translateZ( 150px );
+	-moz-transform: translateZ( 150px );
+	transform: translateZ( 150px );
+}
+
+
+
+
+

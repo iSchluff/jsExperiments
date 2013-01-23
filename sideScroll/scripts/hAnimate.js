@@ -39,16 +39,16 @@ Display.prototype = {
 			});
 		}
 	},
-	switchView : function (view, callback, animate, direction, yPos) { //direction -1/+1
+	switchView : function (view, callback, animate, direction, scrollPosition) { //direction -1/+1
 		if (!view || this.animating)
 			return;
 			
 		var animate = animate || false;
 		var direction = direction || -1;
-		var yPos = yPos || 0;
+		var scrollPosition = scrollPosition || 0;
 		var prevHash = window.location.hash;
 		var prevScroll = this.container.parentNode.scrollTop;
-		console.log("yPos: "+yPos);
+		console.log("scrollPosition: "+scrollPosition);
 		
 		if (window.location.hash != view.id) {
 			window.location.hash = view.id;
@@ -74,24 +74,24 @@ Display.prototype = {
 			setCss(tmpContainer, this.containerCss);
 			setCss(tmpContainer, {
 				"-webkit-transform" : "translate3d(" + (-direction * 100) + "%, 0, 0)",
-				"top" : (this.container.parentNode.scrollTop - yPos) + "px"
+				"top" : (this.container.parentNode.scrollTop - scrollPosition) + "px"
 			});
 			
-			console.log(this.container.parentNode.scrollTop - yPos);
+			console.log(this.container.parentNode.scrollTop - scrollPosition);
 			
 			//fill in enough elements for animation
 			var height = window.innerHeight;
 			var clone = view.cloneNode(true);
 			var left = clone.childNodes.length;
-			while (left-- && tmpContainer.offsetHeight < height+yPos) {
+			while (left-- && tmpContainer.offsetHeight < height+scrollPosition) {
 				tmpContainer.appendChild(clone.childNodes[0]);
 			}
 			
 			//function to execute when animation finishes
 			var finishFn = function () {
-				//move tmpContainer to the right yPosition
+				//move tmpContainer to the right scrollPositionition
 				tmpContainer.style.top = 0;
-				this.container.parentNode.scrollTop = yPos;
+				this.container.parentNode.scrollTop = scrollPosition;
 				
 				//make tmpContainer the new container
 				var tmpRef = this.container
@@ -132,7 +132,7 @@ Display.prototype = {
 			while (left--) {
 				this.container.appendChild(clone.childNodes[0]);
 			}
-			this.container.parentNode.scrollTop = yPos;
+			this.container.parentNode.scrollTop = scrollPosition;
 			if (callback) {
 				callback(animate, prevHash, prevScroll);
 			}

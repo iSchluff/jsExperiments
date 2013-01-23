@@ -1,0 +1,182 @@
+/*css reset*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	background: url(bg.jpg) no-repeat top center #eae9e9;
+}
+
+.container { 
+  width: 300px;
+  height: 300px;
+	margin: 200px auto 400px auto;
+  
+  -moz-perspective: 800px;
+  -webkit-perspective: 800px;
+  perspective: 800px;
+  /*border: 1px solid black;*/
+}
+
+#main {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	-moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Cube Definition */
+#cube {
+	color: #C1530B;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  
+  -moz-transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+#cube:hover{
+	cursor: move;
+}
+
+#cube figure {
+  display: block;
+  position: absolute;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+/* Background / Size of the Planes */
+.fronto, .backo, .righto, .lefto {
+	background: #ffffff;
+	background: -moz-linear-gradient(left,  #ffffff 0%, #f9f9f9 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(100%,#f9f9f9));
+	background: -webkit-linear-gradient(left,  #ffffff 0%,#f9f9f9 100%);
+	background: -o-linear-gradient(left,  #ffffff 0%,#f9f9f9 100%);
+	background: -ms-linear-gradient(left,  #ffffff 0%,#f9f9f9 100%);
+	background: linear-gradient(to right,  #ffffff 0%,#f9f9f9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=1 );
+	border: 1px solid white;
+	color: #C1530B;
+  -webkit-text-stroke: #C1530B 1px; /* Fix chrome font rendering */
+	width: 302px;
+  height: 302px;
+	outline: 1px solid transparent;
+
+}
+
+.fronti, .backi, .righti, .lefti {
+	background: #c1530b;
+	background: -moz-linear-gradient(left,  #c1530b 0%, #ac4806 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#c1530b), color-stop(100%,#ac4806));
+	background: -webkit-linear-gradient(left,  #c1530b 0%,#ac4806 100%);
+	background: -o-linear-gradient(left,  #c1530b 0%,#ac4806 100%);
+	background: -ms-linear-gradient(left,  #c1530b 0%,#ac4806 100%);
+	background: linear-gradient(to right,  #c1530b 0%,#ac4806 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c1530b', endColorstr='#ac4806',GradientType=1 );
+	border: 1px solid transparent;
+	color: #ffffff;
+  -webkit-text-stroke: #ffffff 1px; /* Fix chrome font rendering */
+	width: 298px;
+  height: 298px;
+}
+
+.top, .bottom{
+	width: 302px;
+  height: 302px;
+	background-color: rgba(1, 1, 1, 0);
+	color: rgba(1, 1, 1, 0);
+}
+
+/* Build the Cube */
+
+/* Webkit */
+#cube .fronto  { -webkit-transform: translateZ( 150px );}
+#cube .backo   { -webkit-transform: rotateY( 180deg ) translateZ(  150px );}
+#cube .righto  { -webkit-transform: rotateY(  90deg ) translateZ(  150px );}
+#cube .lefto   { -webkit-transform: rotateY( -90deg ) translateZ(  150px );}
+#cube .fronti  { -webkit-transform: rotateY( 180deg ) translateZ( -149px ) translateX(-1px);}
+#cube .backi   { -webkit-transform: translateZ( -149px ) translateX(1px);}
+#cube .righti  { -webkit-transform: rotateY( -90deg ) translateZ( -149px );}
+#cube .lefti   { -webkit-transform: rotateY(  90deg ) translateZ( -149px );}
+#cube .top		 { -webkit-transform: rotateX(  90deg )	translateZ(  150px );} 
+#cube .bottom	 { -webkit-transform: rotateX( -90deg )	translateZ(  150px );} 
+
+/* Firefox - broken animation */
+#cube .fronto  { -moz-transform: translateZ( 150px );}
+#cube .backo   { -moz-transform: rotateY( 180deg ) translateZ(  150px );}
+#cube .righto  { -moz-transform: rotateY(  90deg ) translateZ(  150px );}
+#cube .lefto   { -moz-transform: rotateY( -90deg ) translateZ(  150px );}
+#cube .fronti  { -moz-transform: rotateY( 180deg ) translateZ( -149px ) translateX(-1px);}
+#cube .backi   { -moz-transform: translateZ( -149px ) translateX(1px);}
+#cube .righti  { -moz-transform: rotateY( -90deg ) translateZ( -149px );}
+#cube .lefti   { -moz-transform: rotateY(  90deg ) translateZ( -149px );}
+#cube .top		 { -moz-transform: rotateX(  90deg )	translateZ(  150px );} 
+#cube .bottom	 { -moz-transform: rotateX( -90deg )	translateZ(  150px );} 
+
+/* Future Browsers */
+#cube .fronto  { transform: translateZ( 150px );}
+#cube .backo   { transform: rotateY( 180deg ) translateZ(  150px );}
+#cube .righto  { transform: rotateY(  90deg ) translateZ(  150px );}
+#cube .lefto   { transform: rotateY( -90deg ) translateZ(  150px );}
+#cube .fronti  { transform: rotateY( 180deg ) translateZ( -149px ) translateX(-1px);}
+#cube .backi   { transform: translateZ( -149px ) translateX(1px);}
+#cube .righti  { transform: rotateY( -90deg ) translateZ( -149px );}
+#cube .lefti   { transform: rotateY(  90deg ) translateZ( -149px );}
+#cube .top		 { transform: rotateX(  90deg )	translateZ(  150px );} 
+#cube .bottom	 { transform: rotateX( -90deg )	translateZ(  150px );} 
+
+#cube { -moz-transform: translateZ( -150px ); -webkit-transform: translateZ( -150px ); transform: translateZ( -150px ); }
+
+/* Text */
+figure .text {
+	text-align: center;
+	padding-top: 10px;
+	 font-size: 6em;
+	font-family: 'Montserrat', sans-serif;
+}
+
+#rightot {
+	font-size: 5em;
+}
+
+a {outline: 0; text-decoration:none;}
+a:link {color:#C17E0B;}      /* unvisited link */
+a:visited {color:#C17E0B;}  /* visited link */
+a:hover {color:#E0A642;}  /* mouse over link */
+a:active {color:#E0A642;}  /* selected link */
+
+
+
+
+

@@ -1,0 +1,152 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.container {
+	width:100%;
+	position:relative;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	/*width set in js*/
+}
+
+#back {
+	display: none;
+	position: absolute;
+	
+	top: 0px;
+	height: 40px;
+	line-height: 33px;
+	
+	font-family: Helvetica, Arial, sans-serif;
+	cursor: pointer;
+	font-size: 20px;
+	color: #6CAC2B;
+	
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #efefef 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#efefef));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#eee 100%);
+	background: linear-gradient(top, #ffffff 1%,#efefef 100%);
+}
+
+#triangle-left {
+	position: absolute;
+	width: 0;
+	height: 0;
+	margin: 15px 0 0 10px;
+	border-top: 5px solid transparent;
+	border-right: 10px solid #6CAC2B;
+	border-bottom: 5px solid transparent;
+}
+
+.ac-container label{
+	padding: 5px 20px;
+	position: relative;
+	display: block;
+	height: 30px;
+	
+	font-family: Helvetica, Arial, sans-serif;
+	cursor: pointer;
+	color: #777;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+	line-height: 33px;
+	font-size: 19px;
+	
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #efefef 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#efefef));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#eee 100%);
+	background: linear-gradient(top, #ffffff 1%,#efefef 100%);
+	
+	border-bottom: 1px solid #bbb;
+}
+html.no-touch .ac-container label:hover, #back:hover{
+	background: #fff;
+}
+
+.ac-container article{
+	position:absolute;
+	display:none;
+	
+	/* left / width set in js */
+	top: 40px;
+	
+	line-height: 23px;
+	font-size: 14px;
+	font-style: italic;
+	color: #353;
+	background: #B0F26D;
+	
+	-webkit-box-shadow: inset 0px 2px 5px 0px rgba(0, 0, 0, .2);
+   box-shadow: inset 0px 2px 5px 0px rgba(0, 0, 0, .2);
+}
+
+article.active, #back.active{
+	display: block;
+}
+
+.ac-container article p, #back p{
+	padding: 5px 30px;
+}
+
+A:link {text-decoration: none;}
+A:visited {text-decoration: none;}
+A:active {text-decoration: none;}
+A:hover {text-decoration: none;}
