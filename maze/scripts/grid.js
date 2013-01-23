@@ -6,13 +6,13 @@ function Cell(x, y, text, color, textColor) {
 
 Cell.prototype = {
 	redraw : true,
-	update : function (t, c, tc) {
-		this.text = t || "";
-		this.color = c || "FFFFFF";
-		this.textColor = tc || "eee";
+	
+	update : function (color, text, textColor) {
+		this.text = text || "";
+		this.color = color || "FFFFFF";
+		this.textColor = textColor || "eee";
 		this.redraw = true;
-	},
-	constructor : Cell
+	}
 };
 
 function Grid(c, cellCount) {
@@ -22,6 +22,7 @@ function Grid(c, cellCount) {
 	this.cellCount = cellCount || 30;
 	this.cellWidth = Math.round((this.w / this.cellCount));
 	
+	this.c=c;
 	this.ctx = c.getContext("2d");
 	
 	this.ctx.fillStyle = "ddd";
@@ -38,6 +39,7 @@ function Grid(c, cellCount) {
 
 Grid.prototype = {
 	cells: new Array(),
+	
 	renderCell : function (cell) {
 		this.ctx.fillStyle = "ffffff";
 		this.ctx.fillRect(cell.x * (this.cellWidth) , cell.y * (this.cellWidth) , this.cellWidth-1 , this.cellWidth-1);
@@ -49,6 +51,7 @@ Grid.prototype = {
 			this.ctx.fillText(cell.text, cell.x * this.cellWidth + 8, cell.y * this.cellWidth + 19);
 		}
 	},
+	
 	redraw : function () {
 		var redrawCount = 0;
 		for (var i = 0; i < this.cells.length; i++) {
@@ -59,14 +62,21 @@ Grid.prototype = {
 				redrawCount++;
 			}
 		}
-		
-		if (redrawCount == 0) {
-			return false;
-		}
-		return true;
+		return (redrawCount!=0);
 	},
+	
 	getCell: function(x,y){
 		return this.cells[this.cellCount*y+x];
 	},
-	constructor: Grid
+	
+	getMouseOver(absoluteX, absoluteY){
+		var localX = absoluteX - this.c.offsetX;
+		var localY = absoluteY - this.c.offsetY;
+		var pos = {
+			x : Math.floor(localX / grid.cellWidth),
+			y : Math.floor(localY / grid.cellWidth),
+			index : this.y * grid.cellCount + this.x
+		}
+		return pos;
+	}
 };
