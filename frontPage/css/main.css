@@ -35,6 +35,13 @@ body {
 	overflow: auto;
 }
 
+#header{
+	text-align: center;
+	background: #2075B1;
+	 white-space: nowrap;
+  overflow: hidden;
+}
+
 h1 {
 	font-size: 60pt;
 	font-family: 'Montserrat', sans-serif;
@@ -42,11 +49,10 @@ h1 {
 	padding: 30px 0 50px 0;
 }
 
-#header{
+#main{
 	text-align: center;
-	background: #2075B1;
-	 white-space: nowrap;
-  overflow: hidden;
+	/*max-width: 1100px;*/
+	margin: 20px auto 20px auto;
 }
 
 .border {
@@ -117,13 +123,13 @@ img {
 .slide p:last-child{
 	color: #2075B1;
 	/*background: #ccc;*/
-		background: #eee;
-	background: -moz-linear-gradient(top, #eee 1%, #ddd 100%);
+	background: #ddd;
+	/*background: -moz-linear-gradient(top, #eee 1%, #ddd 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#eee), color-stop(100%,#ddd));
 	background: -webkit-linear-gradient(top, #eee 1%,#ddd 100%);
-	background: linear-gradient(top, #eee 1%,#ddd 100%);
+	background: linear-gradient(top, #eee 1%,#ddd 100%);*/
 	
-			-moz-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 }
@@ -134,13 +140,6 @@ html.no-touch .border .slide:hover{
 	-webkit-transform: translateY(30px);
 	-moz-transform: translateY(30px);
 	transform: translateY(30px);
-}
-
-
-#main{
-	text-align: center;
-	/*max-width: 1100px;*/
-	margin: 20px auto 20px auto;
 }
 
 a{text-decoration: none;font-style:normal;}
