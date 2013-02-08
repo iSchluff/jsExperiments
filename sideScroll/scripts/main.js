@@ -68,7 +68,7 @@ function init() {
 		console.log("Event: hashchange | new hash: " + window.location.hash); //hash with pre #
 		if(backButton){ //differentiate between button inputs and browser controls
 			var lastSwitch=stack.pop();
-			if(window.location.hash==lastSwitch["hash"]){ //prevents chaos and destruction
+			if(lastSwitch && window.location.hash==lastSwitch["hash"]){ //prevents chaos and destruction
 				display.switchView(getView(window.location.hash.split("#")[1]), onSwitchView, true, -lastSwitch["direction"], lastSwitch["scrollTop"]);
 			}else{ //user must've entered hash in address bar
 				display.switchView(getView(window.location.hash.split("#")[1]), onSwitchView );

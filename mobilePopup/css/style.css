@@ -1,0 +1,154 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+html {
+	height: 100%;
+	width:100%;
+	margin: 0;
+	padding: 0;
+}
+body {
+	overflow: hidden;
+}
+
+.button{
+	padding: 5px 20px;
+	position: relative;
+	display: block;
+	height: 30px;
+	
+	font-family: Helvetica, Arial, sans-serif;
+	cursor: pointer;
+	color: #777;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+	line-height: 33px;
+	font-size: 19px;
+	
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #efefef 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#efefef));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#eee 100%);
+	background: linear-gradient(top, #ffffff 1%,#efefef 100%);
+	
+	border-bottom: 1px solid #bbb;
+}
+
+.formBtn {
+	text-align:center;
+	margin: 20px;
+	
+	font-family: Helvetica, Arial, sans-serif;
+	cursor: pointer;
+	color: white;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	line-height: 33px;
+	font-size: 19px;
+	
+	-webkit-user-select: none;
+  user-select: none;
+	
+	webkit-border-radius: 6px;
+	border-radius: 6px;
+	
+	border: 3px solid #666;
+	background: rgb(121,131,132);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(121,131,132,1)), color-stop(51%,rgba(50,53,56,1)), color-stop(96%,rgba(50,53,56,1)), color-stop(100%,rgba(121,131,132,1)));
+	background: -webkit-linear-gradient(top,  rgba(121,131,132,1) 0%,rgba(50,53,56,1) 51%,rgba(50,53,56,1) 96%,rgba(121,131,132,1) 100%);
+}
+
+.formBtn.over{
+	background: rgb(109,179,242);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(109,179,242,1)), color-stop(50%,rgba(30,105,222,1)), color-stop(96%,rgba(30,105,222,1)), color-stop(100%,rgba(109,179,242,1)));
+	background: -webkit-linear-gradient(top,  rgba(109,179,242,1) 0%,rgba(30,105,222,1) 50%,rgba(30,105,222,1) 96%,rgba(109,179,242,1) 100%);
+}
+
+.red {
+	background: rgb(239,163,153);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,163,153,1)), color-stop(47%,rgba(240,47,23,1)), color-stop(94%,rgba(231,56,39,1)), color-stop(100%,rgba(239,163,153,1)));
+	background: -webkit-linear-gradient(top,  rgba(239,163,153,1) 0%,rgba(240,47,23,1) 47%,rgba(231,56,39,1) 94%,rgba(239,163,153,1) 100%);
+}
+
+.red.over{
+	background: rgb(234,179,175);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(234,179,175,1)), color-stop(46%,rgba(249,89,74,1)), color-stop(94%,rgba(249,89,74,1)), color-stop(100%,rgba(234,179,175,1)));
+	background: -webkit-linear-gradient(top,  rgba(234,179,175,1) 0%,rgba(249,89,74,1) 46%,rgba(249,89,74,1) 94%,rgba(234,179,175,1) 100%);
+}
+
+.popup {
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition : -webkit-transform .25s ease-in-out;
+	-webkit-border-box: border-box;
+	position : absolute;
+	
+	-webkit-box-shadow:  0px -1px 8px -1px rgba(0, 0, 0, .3);
+	box-shadow:  0px -1px 8px -1px rgba(0, 0, 0, .3);
+	border-top: 1px solid white;
+	
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(234,234,234,0.7)), color-stop(14%,rgba(163,163,163,0.7)), color-stop(100%,rgba(163,163,163,0.7)));
+	background: -webkit-linear-gradient(top,  rgba(234,234,234,0.7) 0%,rgba(163,163,163,0.7) 14%,rgba(163,163,163,0.7) 100%);
+	
+	width: 100%;
+	top: 100%;
+}
+
+.fade {
+	-webkit-transition: background .25s linear;
+	position: absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	background: rgba(0,0,0,0);
+}
+
+A:link {text-decoration: none;}
+A:visited {text-decoration: none;}
+A:active {text-decoration: none;}
+A:hover {text-decoration: none;}
