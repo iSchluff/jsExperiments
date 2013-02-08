@@ -19,33 +19,17 @@ function removeToInsertLater(element) {
 function Display(view, parent) { //parent optional - default is document.body
 	this.container = document.createElement("div");
 	this.container.id = "container";
-	this.filler=document.createElement("div");
-	this.filler.id="filler";
-	this.filler.style.positioning="absolute";
+	
 	var parent = parent || document.body;
 	parent.appendChild(this.container);
-//	parent.appendChild(this.filler);
+	this.container.classList.add("container");
+	this.container.parentNode.classList.add("parent");
 	
 	this.animating = false;
-	
-	setCss(this.container.parentNode, {
-		"overflow-x" : "hidden",
-		"overflow-y" : "scroll",
-		"-webkit-overflow-scrolling" : "touch"
-	});
-	
-	setCss(this.container, this.containerCss);
 	this.switchView(view);
 }
 
 Display.prototype = {
-	containerCss : { //helper object
-		"-webkit-transform-style" : "preserve-3d",
-		"-webkit-backface-visibility" : "hidden",
-		"-webkit-box-sizing" : "border-box",
-		"position" : "absolute",
-		"width" : "100%",
-	},
 	resetSize : function (heightDiff) {
 		heightDiff = 0 || heightDiff;
 		if (!this.parentIsBody) {
@@ -80,12 +64,12 @@ Display.prototype = {
 			tmpContainer.id = "tmpContainer";
 			
 			//set it's css
-			setCss(tmpContainer, this.containerCss);
+			tmpContainer.classList.add("container");
+			
 			var top=(this.container.parentNode.scrollTop - scrollPosition);
 			console.log("top: "+top);
 			setCss(tmpContainer, {
-				"-webkit-transform" : "translate3d("+(-direction*100)+"%,"+top+" + px,0)",
-				"-webkit-transition" : "-webkit-transform .35s ease-in-out"
+				"-webkit-transform" : "translate3d("+(-direction*100)+"%,"+top+"px,0)"
 			})
 			
 			//fill in enough elements for animation
@@ -102,46 +86,40 @@ Display.prototype = {
 
 			//function to execute when animation finishes
 			var finishFn = function () {
-				tmpContainer.removeEventListener("webkitTransitionEnd", finishFn);
-				//tmpContainer.style.webkitTransition="";
-				//tmpContainer.style.setProperty("-webkit-transition", "", false);
-				console.log("bla");
 				setTimeout(function(){
-					//move tmpContainer to the right scrollPositionition
-					//tmpContainer.style.top = 0; //flicker
-					this.container.parentNode.scrollTop = scrollPosition;
-					//tmpContainer.style.webkitTransform="translateY(0px)";
-					console.log("blue");
-					
-					//make tmpContainer the new container
-					var tmpRef = this.container
-					this.container = tmpContainer;
-					this.container.id = "container";
-					tmpRef.parentNode.removeChild(tmpRef);
-					
-					//call user-defined callback function
-					if (callback) {
-						callback(animate, prevHash, prevScroll, direction);
-					}
-					this.animating = false;
-				}.bind(this),500);
+				tmpContainer.classList.remove("animatable")
+				tmpContainer.style.webkitTransform="";
+				//make tmpContainer the new container
+				var tmpRef = this.container
+				this.container = tmpContainer;
+				this.container.id = "container";
+				tmpRef.parentNode.removeChild(tmpRef);
+				
+				this.container.parentNode.scrollTop = scrollPosition;
+				
+				//call user-defined callback function
+				if (callback) {
+					callback(animate, prevHash, prevScroll, direction);
+				}
+				this.animating = false;
+				}.bind(this),20);
 			}.bind(this);
 			
 			//wait until tmpContainer is ready
 			setTimeout(function(){
 				container.addEventListener("webkitTransitionEnd", finishFn)
 				//start animation
+				tmpContainer.classList.add("animatable");
+				this.container.classList.add("animatable");
 				
 				setCss(tmpContainer, {
-					"-webkit-transform" : "translate3d(0,"+top+" + px,0)"
+					"-webkit-transform" : "translate3d(0, "+top+"px, 0)"
 				})
 				
 				setCss(this.container, {
-					"-webkit-transition" : "-webkit-transform .35s ease-in-out",
-					"-webkit-transform" : "translateX(" + (direction * 100) + "%)"
+					"-webkit-transform" : "translate3d(" + (direction * 100) + "%, 0, 0)"
 				})
-				//setTimeout(finishFn, 500);
-			}.bind(this), 100);
+			}.bind(this), 50);
 		} else {
 			//replace current container content with the views content
 			this.container.innerHTML = "";

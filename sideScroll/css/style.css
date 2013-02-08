@@ -123,6 +123,24 @@ p {
 	background: linear-gradient(top, #ffffff 1%,#efefef 100%);
 }
 
+.container {
+	-webkit-transform-style : preserve-3d;
+	-webkit-backface-visibility : hidden;
+	-webkit-box-sizing : border-box;
+	width : 100%;
+	position: absolute;
+}
+
+.parent {
+	overflow-x : hidden;
+	overflow-y : scroll;
+	-webkit-overflow-scrolling : touch;
+}
+
+.animatable {
+	-webkit-transition : -webkit-transform .35s ease-in-out;
+}
+
 .triangle-right {
 	position: absolute;
 	width: 0;
