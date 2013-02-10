@@ -48,6 +48,15 @@ table {
 }
 
 /* Custom CSS */
+body, html {
+	height: 100%;
+} 
+
+body{
+	overflow-x : hidden;
+	height:100%;
+}
+
 header, footer {
 	position:fixed;
 	z-index:100;
@@ -62,15 +71,6 @@ header, footer {
 	/*background: rgb(46,46,46);*/
 	background: #333;
 	color: white;
-}
-
-#parent {
-	position:absolute;
-	top:40px;
-}
-
-body {
-	height: auto;
 }
 
 header {
@@ -127,18 +127,25 @@ p {
 	-webkit-transform-style : preserve-3d;
 	-webkit-backface-visibility : hidden;
 	-webkit-box-sizing : border-box;
-	width : 100%;
-	position: absolute;
-}
-
-.parent {
-	overflow-x : hidden;
-	overflow-y : scroll;
+	
 	-webkit-overflow-scrolling : touch;
+	overflow-y : scroll;
+
+	width : 100%;
+	top:40px;
+	position: absolute;
 }
 
 .animatable {
 	-webkit-transition : -webkit-transform .35s ease-in-out;
+}
+
+.left {
+	-webkit-transform: translate3d(-100%,0,0);
+}
+
+.right{
+	-webkit-transform: translate3d(100%,0,0);
 }
 
 .triangle-right {

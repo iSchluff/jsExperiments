@@ -18,7 +18,7 @@ function init() {
 		
 		addToAll("btn","click", function () {
 			backButton=false;
-			display.switchView(getView("view2"), onSwitchView, true, -1);
+			display.switchView(getView("view2"), onSwitchView, true, 1);
 		});
 		
 		addToAll("addBtn", "click", function () {
@@ -65,7 +65,7 @@ function init() {
 	});
 	
 	window.addEventListener("hashchange", function () {
-		console.log("Event: hashchange | new hash: " + window.location.hash); //hash with pre #
+		console.log("Event: hashchange | new hash: " + window.location.hash+" backButton: "+backButton); //hash with pre #
 		if(backButton){ //differentiate between button inputs and browser controls
 			var lastSwitch=stack.pop();
 			if(lastSwitch && window.location.hash==lastSwitch["hash"]){ //prevents chaos and destruction
