@@ -6,82 +6,86 @@
 
 var size=50;
 var max=14;
-var counter=0;
 var squares=new Array();
+var running=false;
 
 function init(){
-	var counter;
+	var n;
 	
-	for (var i=0;i<max;i++){
+	for(var i=0;i<max;i++){
 		for(var j=0;j<max;j++){
-			counter=i*max+j;
-			$(".container").append(" <div on class='square num" + counter +"'></div> ");
-			squares.push($(".num"+counter));
-			squares[counter].css("top",i*size);
-			squares[counter].css("left",j*size);
-			squares[counter].css("-webkit-transform","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)");
-			squares[counter][0].hovered=false;
-			squares[counter][0].i=i;
-			squares[counter][0].j=j;
-			squares[counter][0].speed=0;
+			n=i*max+j; //unique number for id
+			$(".container").append(" <div id='num"+n+"' class='square'></div> ");
+			squares.push(document.getElementById("num"+n));
+			squares[n].style.top=i*size+"px";
+			squares[n].style.left=j*size+"px";
+			squares[n].style.webkitTransform="matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)";
+			squares[n].animated=false;
+			squares[n].targetZ=0;
+			squares[n].i=i;
+			squares[n].j=j;
 			
-			squares[counter].click(function(event){ //register mouse Event Listeners
+			squares[n].onclick= function(event){ //register mouse Event Listeners
 				var square=event.currentTarget;
-				console.log("huhu");
-				turn(square);
-				requestAnimationFrame(onEnterFrame);
-			});
+				animate(square);
+				if(!running){
+					requestAnimationFrame(onEnterFrame);
+				}
+			};
 		}
 	}
 }
 
 function onEnterFrame(time){
-	var update=true;
-	counter++;
+	running=true;
+	var update=false;
 	for(var i=0;i<squares.length;i++){
-		if(squares[i][0].hovered){
-			var transform=squares[i].css("-webkit-transform");
-			if(transform !="matrix(1, 0, 0, 1, 0, 0)"){ 
-				var dz=transform.split(", ")[14];
-				var speed=0.2*(150-dz)+0.8*squares[i][0].speed
-				dz+=squares[i][0].speed;
-				console.log(dz+" "+speed);
-				squares[i].css("-webkit-transform","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, "+dz+", 1)");
-				squares[i][0].speed=speed*0.9;
-				if(Math.abs(speed)<0.0001){
-					speed=0;
+		if(squares[i].animated){
+			update=true;
+			var transform=squares[i].style.webkitTransform;
+			var z=Number(transform.split(", ")[14]);
+			var newZ=z+(squares[i].targetZ-z)/10;
+			var dz=squares[i].targetZ-newZ;
+			
+			if(Math.abs(dz)<0.5){
+				newZ=squares[i].targetZ;
+				
+				if(squares[i].targetZ==0){ //reached target
+					squares[i].animated=false;
+				}else{
+					squares[i].targetZ=0; //swap direction
 				}
-			}else{
-				squares[counter].css("-webkit-transform","matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1)");
 			}
-		}else{
+			squares[i].style.webkitTransform="matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, "+newZ+", 1)";
 		}
 	}
-	
-	if(counter<500)requestAnimationFrame(onEnterFrame);
+	if(update){
+		requestAnimationFrame(onEnterFrame);
+	}else{
+		running=false;
+	}
 }
 
-function turn(square){
-		if(!square.hovered){
-		square.hovered=true;	
-		var x=square.i;
-		var y=square.j;
-	
-		square.timeLeft=500;
+function animate(square){
+		if(!square.animated){
+		square.animated=true;
+		square.targetZ=150;	
+		var x=square.j;
+		var y=square.i;
 
-		/*turnSquare(x+1,y);
+		turnSquare(x+1,y);
 		turnSquare(x-1,y);
 		turnSquare(x,y+1);
-		turnSquare(x,y-1);*/
+		turnSquare(x,y-1);
 
 	}
 }
 
 function turnSquare(x,y){
 	var c=x+max*y;
-	if(x>-1 && x<max && y>-1 && y<max && !squares[c][0].hovered){
+	if(x>-1 && x<max && y>-1 && y<max && !squares[c].animated){
 		setTimeout(function(){
-			turn(squares[c][0]);
+			animate(squares[c]);
 		},75);
 	}
 }
