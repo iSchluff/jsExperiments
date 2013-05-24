@@ -33,20 +33,7 @@ body {
 	/*background: url(images/bg.png) top left #eae9e9;*/
 	width: 100%;
 	overflow: auto;
-}
-
-#header{
-	text-align: center;
-	background: #2075B1;
-	 white-space: nowrap;
-  overflow: hidden;
-}
-
-h1 {
-	font-size: 60pt;
-	font-family: 'Montserrat', sans-serif;
-	color: #fff;
-	padding: 30px 0 50px 0;
+	background: #f3f3f3;
 }
 
 #main{
@@ -55,30 +42,50 @@ h1 {
 	margin: 20px auto 20px auto;
 }
 
-.border {
+/*==================================================
+ * Headline
+ * ===============================================*/
+#header{
+	text-align: center;
+	background: #2075B1;
+	 white-space: nowrap;
+  overflow: hidden;
+}
+
+h1 {
+	font-size: 450%;
+	font-family: 'Montserrat', sans-serif;
+	color: #fff;
+	padding: 30px 0 50px 0;
+}
+
+
+
+/*==================================================
+ * Floating Boxes
+ * ===============================================*/
+.box {
 	display: inline-block;
 	position: relative;
-	overflow:hidden;
+	margin: 20px;
+}
+
+.border {
+	position: relative;
 	width: 230px;
 	height: 260px;
-	margin: 20px;
-	z-index: 1000;
-	
-	-webkit-box-shadow:rgb(204, 204, 204) 0px 7px 23px -5px;
-	-moz-box-shadow:rgb(204, 204, 204) 0px 7px 23px -5px;
-	box-shadow:rgb(204, 204, 204) 0px 7px 23px -5px;
+	overflow:hidden;
 	
 	background: #fff;
 	border: 25px solid white;
-	
 }
 
-.border .slide {
+.slide {
 	position: absolute;
 	top: -30px;
 	width: 230px;
-	z-index: 800;
 	height: 230px;
+	
 	-moz-transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
 	transition: all .3s ease-in-out;
@@ -90,7 +97,7 @@ h1 {
 
 .shadowWrap {
 	-webkit-box-shadow: inset 0px 0px 7px -1px rgba(0, 0, 0, .4);
-  box-shadow: inset 0px 0px 7px -1px rgba(0, 0, 0, .4);
+ 	box-shadow: inset 0px 0px 7px -1px rgba(0, 0, 0, .4);
 	max-width:230px;
 	max-height:230px;
 	position:relative;
@@ -99,9 +106,11 @@ h1 {
 img {
 	z-index:-1;
 	position:relative;
-	
 }
 
+/*==================================================
+ * Top/Bottom Text
+ * ===============================================*/
 .slide p{
 	font-family: 'Montsserat', sans-serif;
 	font-size: 14pt;
@@ -114,7 +123,7 @@ img {
 .slide p:first-child{
 	color: rgb(255, 255, 255);
 	background-color: rgb(66, 129, 184);
-		-moz-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 
@@ -123,18 +132,16 @@ img {
 .slide p:last-child{
 	color: #2075B1;
 	/*background: #ccc;*/
-	background: #ddd;
-	background: -moz-linear-gradient(top, #eee 1%, #ddd 100%);
+	background: #eae9e9;
+	/*background: -moz-linear-gradient(top, #eee 1%, #ddd 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#eee), color-stop(100%,#ddd));
 	background: -webkit-linear-gradient(top, #eee 1%,#ddd 100%);
-	background: linear-gradient(top, #eee 1%,#ddd 100%);
+	background: linear-gradient(top, #eee 1%,#ddd 100%);*/
 	
 	-moz-transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 }
-
-
 
 html.no-touch .border .slide:hover{
 	-webkit-transform: translateY(30px);
@@ -147,3 +154,38 @@ a{text-decoration: none;font-style:normal;}
 /*a:visited {color:#0C5DA5;}*/  /* visited link */
 a:hover {font-style:normal;} */ /* mouse over link 
 /*a:active {color:#408DD2;}*/  /* selected link */
+
+
+/*==================================================
+ * Shadow Effect
+ * ===============================================*/
+.box{}
+.box:before, .box:after{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.box:after
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
