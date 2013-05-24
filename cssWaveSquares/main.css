@@ -43,35 +43,20 @@ body {
 
 .square{
 	position:absolute;
-	width:50px;
-	height:50px;
-	
-	-webkit-transform: translateZ( 0px );
-	-moz-transform: translateZ( 0px );
-	transform: translateZ( 0px );
+	width:70px;
+	height:70px;
 	
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
 	
-	-webkit-text-stroke: #aaaaaa 1px; /* Fix chrome font rendering */
-	color: #aaaaaa;
 	border: 1px solid #eae9e9;
-	background: #666666;
+	background: #888;
 	
 	text-align:center;
 	font-size: 5em;
 	font-family: 'Montserrat', sans-serif;
 }
-
-.hovered{
-	/*-webkit-transform: rotateX( 180deg );*/
-	/*background: #ffffff !important;*/
-	-webkit-transform: translateZ( 150px );
-	-moz-transform: translateZ( 150px );
-	transform: translateZ( 150px );
-}
-
 
 
 

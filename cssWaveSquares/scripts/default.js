@@ -4,8 +4,8 @@
   window.requestAnimationFrame = requestAnimationFrame;
 })();
 
-var size=50;
-var max=14;
+var size=70;
+var max=10;
 var squares=new Array();
 var running=false;
 
@@ -42,11 +42,16 @@ function onEnterFrame(time){
 	for(var i=0;i<squares.length;i++){
 		if(squares[i].animated){
 			update=true;
+			
+			//get current z-Position
 			var transform=squares[i].style.webkitTransform;
 			var z=Number(transform.split(", ")[14]);
-			var newZ=z+(squares[i].targetZ-z)/10;
+			
+			//calculate new z
+			var newZ=z+(squares[i].targetZ-z)/8;
 			var dz=squares[i].targetZ-newZ;
 			
+			//check if target was reached
 			if(Math.abs(dz)<0.5){
 				newZ=squares[i].targetZ;
 				
@@ -56,6 +61,13 @@ function onEnterFrame(time){
 					squares[i].targetZ=0; //swap direction
 				}
 			}
+			
+			//calculate color 
+			var c=Math.floor(0x77*(newZ/150)+0x88);
+			var col=c<<16|c<<8|c;
+			
+			//apply css style changes
+			squares[i].style.background="#"+col.toString(16);
 			squares[i].style.webkitTransform="matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, "+newZ+", 1)";
 		}
 	}
@@ -77,7 +89,6 @@ function animate(square){
 		turnSquare(x-1,y);
 		turnSquare(x,y+1);
 		turnSquare(x,y-1);
-
 	}
 }
 
