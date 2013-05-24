@@ -1,0 +1,38 @@
+html, body, div, span, h1, h2, p, a, img,
+figure, footer, header, section {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, section {
+	display: block;
+}
+
+body {
+	background: #eae9e9;
+}
+
+#main {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	user-select: none;
+}
+
+#canvas { 
+	display: block;
+	position: relative;
+	margin: 200px auto auto auto;
+}
+
+
+
+
+
