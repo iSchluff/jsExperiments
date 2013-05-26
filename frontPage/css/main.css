@@ -25,12 +25,11 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+footer, header, hgroup, menu, nav, section, img {
 	display: block;
 }
 
 body {
-	/*background: url(images/bg.png) top left #eae9e9;*/
 	width: 100%;
 	overflow: auto;
 	background: #f3f3f3;
@@ -38,7 +37,6 @@ body {
 
 #main{
 	text-align: center;
-	/*max-width: 1100px;*/
 	margin: 20px auto 20px auto;
 }
 
@@ -48,8 +46,8 @@ body {
 #header{
 	text-align: center;
 	background: #2075B1;
-	 white-space: nowrap;
-  overflow: hidden;
+	white-space: nowrap;
+  	overflow: hidden;
 }
 
 h1 {
@@ -58,8 +56,6 @@ h1 {
 	color: #fff;
 	padding: 30px 0 50px 0;
 }
-
-
 
 /*==================================================
  * Floating Boxes
@@ -71,20 +67,16 @@ h1 {
 }
 
 .border {
-	position: relative;
 	width: 230px;
 	height: 260px;
 	overflow:hidden;
-	
 	background: #fff;
 	border: 25px solid white;
 }
 
 .slide {
-	position: absolute;
+	position: relative;
 	top: -30px;
-	width: 230px;
-	height: 230px;
 	
 	-moz-transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
@@ -95,17 +87,8 @@ h1 {
 	transform-style: preserve-3d;
 }
 
-.shadowWrap {
-	-webkit-box-shadow: inset 0px 0px 7px -1px rgba(0, 0, 0, .4);
- 	box-shadow: inset 0px 0px 7px -1px rgba(0, 0, 0, .4);
-	max-width:230px;
-	max-height:230px;
-	position:relative;
-}
-
 img {
-	z-index:-1;
-	position:relative;
+	
 }
 
 /*==================================================
@@ -113,34 +96,25 @@ img {
  * ===============================================*/
 .slide p{
 	font-family: 'Montsserat', sans-serif;
-	font-size: 14pt;
+	font-size: 18px;
 	line-height: 30px;
 	font-style: normal;
 	width: 230px;
 	height: 30px;
-}
-
-.slide p:first-child{
-	color: rgb(255, 255, 255);
-	background-color: rgb(66, 129, 184);
-	-moz-transform-style: preserve-3d;
-	-webkit-transform-style: preserve-3d;
-	transform-style: preserve-3d;
-
-}
-
-.slide p:last-child{
-	color: #2075B1;
-	/*background: #ccc;*/
-	background: #eae9e9;
-	/*background: -moz-linear-gradient(top, #eee 1%, #ddd 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#eee), color-stop(100%,#ddd));
-	background: -webkit-linear-gradient(top, #eee 1%,#ddd 100%);
-	background: linear-gradient(top, #eee 1%,#ddd 100%);*/
 	
 	-moz-transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
+}
+
+.slide p:first-child{
+	color: #fff;
+	background-color: rgb(66, 129, 184);
+}
+
+.slide p:last-child{
+	color: #2075B1;
+	background: #eae9e9;
 }
 
 html.no-touch .border .slide:hover{
