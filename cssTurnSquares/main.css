@@ -1,34 +1,3 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-
 body {
 	background: #eae9e9;
 }
@@ -46,37 +15,35 @@ body {
 }
 
 .container { 
-  width: 700px;
-  height: 700px;
-	position: relative;
-	margin: 200px auto auto auto;
-  
-  -moz-perspective: 2000px;
-  -webkit-perspective: 2000px;
-  perspective: 2000px;
-  /*border: 1px solid black;*/
+    width: 700px;
+    height: 700px;
+    position: relative;
+    margin: 200px auto auto auto;
+    
+    -moz-perspective: 2000px;
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+    
 }
 
 #cube:hover{
 	cursor: move;
 }
 
-/* Background / Size of the Planes */
-
-/* Build the Cube */
-
 .square{
 	position:absolute;
 	width:100px;
 	height:100px;
+    
 	
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 	
-	-moz-transition: all .5s ease-in-out; /* Firefox 4 */
-	-webkit-transition: all .5s ease-in-out; /* Safari and Chrome */
+	-moz-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
 	transition: all .5s ease-in-out;
+    
 }
 
 .square div{
@@ -85,19 +52,15 @@ body {
 	width: 100px;
 	height: 100px;
 	
-	text-align:center;
-	font-size: 5em;
-	font-family: 'Montserrat', sans-serif;
-	
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
 }
 
 .hovered{
-	-webkit-transform: rotateX( 180deg );
-	-moz-transform: rotateX( 180deg );
-	transform: rotateX( 180deg );
+    -webkit-transform: rotateX( 180deg );
+    -moz-transform: rotateX( 180deg );
+    transform: rotateX( 180deg );
 }
 
 /* Webkit */
@@ -109,14 +72,14 @@ body {
 }
 
 .square .back {
- -webkit-transform: rotateZ( 180deg ) rotateY( 180deg );
- -moz-transform: rotateZ( 180deg ) rotateY( 180deg );
- transform: rotateZ( 180deg ) rotateY( 180deg );
- 
-	color: #666666;
-	-webkit-text-stroke: #666666 1px; /* Fix chrome font rendering */
-	
-	background: #ffffff;
+    -webkit-transform:rotateY(180deg) translateY(-100px);
+    -moz-transform:rotateY(180deg) translateY(-100px);
+    transform:rotateY(180deg) translateY(-100px);
+    
+    color: #666666;
+    -webkit-text-stroke: #666666 1px; /* Fix chrome font rendering */
+    
+    background: #ffffff;
 }
 
 /* Text */
