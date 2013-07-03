@@ -100,7 +100,7 @@ h1 {
 .border {
 	width: 230px;
 	height: 260px;
-	overflow:hidden;
+	overflow: hidden;
 	background: #fff;
 	border: 25px solid white;
 }
@@ -109,13 +109,12 @@ h1 {
 	position: relative;
 	top: -30px;
 	
-	-moz-transition: all .3s ease-in-out;
 	-webkit-transition: all .3s ease-in-out;
 	transition: all .3s ease-in-out;
 	
-	-moz-transform-style: preserve-3d;
+	/*-moz-transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
-	transform-style: preserve-3d;
+	transform-style: preserve-3d;*/
 }
 
 /*==================================================
@@ -153,7 +152,7 @@ html.no-touch .border .slide:hover{
 a{text-decoration: none;font-style:normal;}
 /*a:link {color:#0C5DA5;} */     /* unvisited link */
 /*a:visited {color:#0C5DA5;}*/  /* visited link */
-a:hover {font-style:normal;} */ /* mouse over link 
+a:hover {font-style:normal;} /* mouse over link 
 /*a:active {color:#408DD2;}*/  /* selected link */
 
 
@@ -172,7 +171,6 @@ a:hover {font-style:normal;} */ /* mouse over link
   max-width:300px;
   background: #777;
   -webkit-box-shadow: 0 15px 10px #777;
-  -moz-box-shadow: 0 15px 10px #777;
   box-shadow: 0 15px 10px #777;
   -webkit-transform: rotate(-3deg);
   -moz-transform: rotate(-3deg);
