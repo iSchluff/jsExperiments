@@ -20,6 +20,7 @@ function init(){
 			squares[n].style.top=i*size+"px";
 			squares[n].style.left=j*size+"px";
 			squares[n].style.webkitTransform="matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)";
+            squares[n].style.transform="matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)";
 			squares[n].animated=false;
 			squares[n].targetZ=0;
 			squares[n].i=i;
@@ -44,7 +45,7 @@ function onEnterFrame(time){
 			update=true;
 			
 			//get current z-Position
-			var transform=squares[i].style.webkitTransform;
+			var transform=squares[i].style.webkitTransform||squares[i].style.transform;
 			var z=Number(transform.split(", ")[14]);
 			
 			//calculate new z
@@ -69,6 +70,7 @@ function onEnterFrame(time){
 			//apply css style changes
 			squares[i].style.background="#"+col.toString(16);
 			squares[i].style.webkitTransform="matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, "+newZ+", 1)";
+            squares[i].style.transform="matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, "+newZ+", 1)";
 		}
 	}
 	if(update){
