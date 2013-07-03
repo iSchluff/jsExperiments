@@ -8,7 +8,6 @@ var FILTER=0.6;
 var FILTER2=0.03;
 var TRESHOLD=1e-3;
 
-
 var prevClass="show-front"
 var sourceMat;
 var lastPos=new Array(0,0);
@@ -21,6 +20,7 @@ var inverted=false;
 
 
 function init(){
+    //console.log("Browser:",BrowserDetect.browser);
 	$("#cube").mousedown(function(event){ //register mouseDown listener
 		mouseDown=true;
 		lastPos[0]=event.pageX;
@@ -52,8 +52,13 @@ function init(){
 			animating=true;
 		}
 	});
-	
-	sourceMat=parse3Mat($("#cube").css("-webkit-transform")); //get matrix without rotations
+    
+	//sourceMat= parse3Mat("matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -150, 1)"); // matrix without rotations
+    sourceMat= Matrix.create([
+    [1,  0,  0],
+    [0,  1,  0],
+    [0,  0,  1]
+  ]);
 } 
 
 //render loop
@@ -113,10 +118,9 @@ function onEnterFrame(t){
 		xRot*=Math.PI/180; yRot*=Math.PI/180
 	}
 	
-	var rotMat = Matrix.RotationY(xRot).multiply(Matrix.RotationX(-yRot)); // Y then X -> Euler Rotation
-	var newMat = rotMat.multiply(sourceMat);
+	var newMat = sourceMat.multiply(Matrix.RotationY(xRot).multiply(Matrix.RotationX(-yRot))) // Y then X -> Euler Rotation
 	$("#cube").css("-webkit-transform",mat3ToString(newMat));
-	$("#cube").css("-moz-transform",mat3ToString(newMat));
+    $("#cube").css("-ms-transform",mat3ToString(newMat));
 	$("#cube").css("transform",mat3ToString(newMat));
 }
 
@@ -128,51 +132,26 @@ function checkRange(alpha){
 	}
 }
 
-//Wandelt css3d Matrix-String in Sylvester-Matrix um
-function parse3Mat(string){
-	//Creating Array from String
-	var strArr= string.split("(")[1].split(")")[0].split(", ")
-	
-	//Formatting into 4x4 int-Array
-	var intArr=new Array();
-	for(var i=0;i<3;i++){
-		intArr[i]=new Array();
-		for(var j=0;j<3;j++){
-			intArr[i][j]=parseFloat(strArr[4*i+j]);
-		}
-	}
-	return $M(intArr);
-}
-
 //Wandelt Sylvester-Matrix in css3d Matrix-String um
 function mat3ToString(matrix){
-	string="matrix3d(";
-	for(var i=1;i<=3;i++){
-		for(var j=1;j<=3;j++){
-			if(animating){
-				string+=matrix.e(i,j);
-			}else{
-				string+=Math.round(matrix.e(i,j)); //align exactly when the animation stops
-			}
-			string+=", ";
-		}
-		string+="0, ";
-	}
-	return string+"0,0,-150,1)";
+    l= animating? 10 : 0;
+    s  = "matrix3d(";
+    s += matrix.e(1,1).toFixed(l) + "," + matrix.e(1,2).toFixed(l) + "," + matrix.e(1,3).toFixed(l) + ",0,";
+    s += matrix.e(2,1).toFixed(l) + "," + matrix.e(2,2).toFixed(l) + "," + matrix.e(2,3).toFixed(l) + ",0,";
+    s += matrix.e(3,1).toFixed(l) + "," + matrix.e(3,2).toFixed(l) + "," + matrix.e(3,3).toFixed(l) + ",0,";
+    s += "0,0,-150,1)";
+    return s;
 }
 
 //Sucht die nächste Zahl aus 0,90,180,280 und 360
 function nextnumber(wert) {
-	var numbers=new Array(0,90,180,270,360);
-	var min=360;
-	var j;
-	var zahl;
-	var index;
+	var numbers=new Array(0,90,180,270,360); var min=360;
+	var diff; var zahl; var index;
 	for (var i=0; i<5; i++) {
 		zahl=numbers[i];
-		j=wert-zahl;
-		if (Math.abs(j)<min) {
-			min=j;
+		diff=wert-zahl;
+		if (Math.abs(diff)<min) {
+			min=diff;
 			index=i;
 		}
 	}
