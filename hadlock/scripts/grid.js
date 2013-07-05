@@ -8,11 +8,10 @@ Cell.prototype = {
 	redraw : true,
 	update : function (t, c, tc) {
 		this.text = t || "";
-		this.color = c || "FFFFFF";
-		this.textColor = tc || "eee";
+		this.color = c || "#fff";
+		this.textColor = tc || "#eee";
 		this.redraw = true;
-	},
-	constructor : Cell
+	}
 };
 
 function Grid(c, cellCount) {
@@ -24,7 +23,7 @@ function Grid(c, cellCount) {
 	
 	this.ctx = c.getContext("2d");
 	
-	this.ctx.fillStyle = "ddd";
+	this.ctx.fillStyle = "#ddd";
 	this.ctx.fillRect(0,0, this.w, this.h);
 	
 	for (var i = 0; i < this.cellCount; i++) {
@@ -39,7 +38,7 @@ function Grid(c, cellCount) {
 Grid.prototype = {
 	cells: new Array(),
 	renderCell : function (cell) {
-		this.ctx.fillStyle = "ffffff";
+		this.ctx.fillStyle = "#fff";
 		this.ctx.fillRect(cell.x * (this.cellWidth) , cell.y * (this.cellWidth) , this.cellWidth-1 , this.cellWidth-1);
 		this.ctx.fillStyle = cell.color;
 		this.ctx.fillRect(cell.x * (this.cellWidth)+2 , cell.y * (this.cellWidth)+2 , this.cellWidth-5 , this.cellWidth-5);
@@ -67,6 +66,5 @@ Grid.prototype = {
 	},
 	getCell: function(x,y){
 		return this.cells[this.cellCount*y+x];
-	},
-	constructor: Grid
+	}
 };

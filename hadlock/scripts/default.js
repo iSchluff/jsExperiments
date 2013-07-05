@@ -14,6 +14,7 @@ fadeHex = (function (hex, hex2, ratio) {
 	return (r << 16 | g << 8 | b);
 })
 
+
 //global variables
 var grid; //Grid-Instance
 var hadlock; //Hadlock-Instance
@@ -47,7 +48,7 @@ var fsm = StateMachine.create({
 			onstartDraw : function (event, from, to, pos) {
 				drawMode = 1 - walls[pos.x][pos.y];
 				walls[pos.x][pos.y] = drawMode;
-				drawMode ? grid.getCell(pos.x, pos.y).update("", "555") : grid.getCell(pos.x, pos.y).update();
+				drawMode ? grid.getCell(pos.x, pos.y).update("", "#555") : grid.getCell(pos.x, pos.y).update();
 			},
 			onstart : function (event, from, to) {
 				hadlock = new Hadlock(grid, s, t, walls);
@@ -94,8 +95,8 @@ function clear(){
 			}
 		}
 	}
-	grid.getCell(t.x, t.y).update("T", "BF3A30");
-	grid.getCell(s.x, s.y).update("S", "259238");
+	grid.getCell(t.x, t.y).update("T", "#BF3A30");
+	grid.getCell(s.x, s.y).update("S", "#259238");
 	walls[s.x][s.y] = 2;
 	walls[t.x][t.y] = 2;
 	requestAnimationFrame(enterFrame);
@@ -119,7 +120,7 @@ function samePos(position, cell) {
 	return position.x == cell.x && position.y == cell.y ? cell : null;
 }
 
-function getMousePos(offset) {
+function getMousePos(event, offset) {
 	var localX = event.pageX - offset["left"];
 	var localY = event.pageY - offset["top"];
 	var pos = {
@@ -131,7 +132,7 @@ function getMousePos(offset) {
 }
 
 function handleMouse(event) {
-	var pos = getMousePos($("#canvas").offset());
+	var pos = getMousePos(event, $("#canvas").offset());
 	if (event.type != "mousemove" && event.type != "touchmove") {
 		console.log(fsm.current + " " + pos.x + " " + pos.y);
 	}
@@ -147,11 +148,11 @@ function handleMouse(event) {
 			walls[dragObj.x][dragObj.y] = 0;
 			dragObj.x = pos.x;
 			dragObj.y = pos.y;
-			dragObj == s ? grid.getCell(pos.x, pos.y).update("S", "259238") : grid.getCell(pos.x, pos.y).update("T", "BF3A30");
+			dragObj == s ? grid.getCell(pos.x, pos.y).update("S", "#259238") : grid.getCell(pos.x, pos.y).update("T", "#BF3A30");
 			walls[pos.x][pos.y] = 2;
 		} else if (fsm.is("draw") && walls[pos.x][pos.y] != 2) {
 			walls[pos.x][pos.y] = drawMode;
-			drawMode ? grid.getCell(pos.x, pos.y).update("", "555") : grid.getCell(pos.x, pos.y).update();
+			drawMode ? grid.getCell(pos.x, pos.y).update("", "#555") : grid.getCell(pos.x, pos.y).update();
 		}
 	}
 	requestAnimationFrame(enterFrame);
@@ -244,7 +245,7 @@ Hadlock.prototype = {
 		for (var i = 1; i <= 4; i++) { //create / label cell in every direction
 			this.labelCell(this.getAdjacentCell(cell, i, true), cell);
 			if(cell!=this.source){
-				this.g.getCell(cell.x, cell.y).update(cell.value.toString(), "CDE3F3", "555");
+				this.g.getCell(cell.x, cell.y).update(cell.value.toString(), "#CDE3F3", "#555");
 			}
 		}
 	},
@@ -270,7 +271,7 @@ Hadlock.prototype = {
 			}
 			//visualize
 			if(cell!=this.target){
-				this.g.getCell(cell.x, cell.y).update(cell.value.toString(), "D4FFDB", "555");
+				this.g.getCell(cell.x, cell.y).update(cell.value.toString(), "#D4FFDB", "#555");
 			}else{
 				console.log("####################FOO: "+cell.value+" "+prevCell.value+" "+this.towards(prevCell,cell));
 			}
@@ -346,7 +347,7 @@ Hadlock.prototype = {
 			for (var i = 1; i <= 4; i++) { //create / label cell in every direction
 				var adjCell = this.getAdjacentCell(this.currCell, i, false);
 				if(adjCell!=null){
-					this.g.getCell(adjCell.x, adjCell.y).update(adjCell.value.toString(),"993333")
+					this.g.getCell(adjCell.x, adjCell.y).update(adjCell.value.toString(),"#993333")
 					console.log(adjCell);
 					console.log(this.currValue+" "+this.target.value+" "+(adjCell.x != this.currCell.x - this.xDiff || adjCell.y != this.currCell.y - this.yDiff));
 					//console.log(this.g.getCell(adjCell.x, adjCell.y));
