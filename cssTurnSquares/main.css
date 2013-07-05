@@ -38,6 +38,7 @@ body {
 	
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 	
 	-moz-transition: all .5s ease-in-out;
@@ -54,12 +55,14 @@ body {
 	
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
 	backface-visibility: hidden;
 }
 
 .hovered{
     -webkit-transform: rotateX( 180deg );
     -moz-transform: rotateX( 180deg );
+    -ms-transform: rotateX( 180deg );
     transform: rotateX( 180deg );
 }
 
@@ -74,6 +77,7 @@ body {
 .square .back {
     -webkit-transform:rotateY(180deg) translateY(-100px);
     -moz-transform:rotateY(180deg) translateY(-100px);
+    -ms-transform:rotateY(180deg) translateY(-100px);
     transform:rotateY(180deg) translateY(-100px);
     
     color: #666666;

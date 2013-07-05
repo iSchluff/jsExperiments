@@ -86,6 +86,7 @@ function onEnterFrame(t){
 			xRot-=xDiff/2.5;
 		}
 
+        
 		yRot+=yDiff/2.5;
 		xRot+=360; xRot%=360; yRot+=360; yRot%=360
 		xRot*=Math.PI/180; yRot*=Math.PI/180
