@@ -1,4 +1,4 @@
 jsExperiments
 =============
 
-Homepage cookie-factory.de/experiments
+Small Javascript Projects
