@@ -30,11 +30,10 @@ var slider = function(container, config){
   // moves the slider to current index + parametric offset
   var translate = function(diff, time){
     offset = diff;
-    TweenMax.to(element, time, {x: ((-width * index)+ diff + containerOffset)});
     if(browser.ie8){
-      TweenMax.to(element, time, {left: ((-width * index)+ diff + containerOffset)});
+      TweenLite.to(element, time, {left: ((-width * index)+ diff + containerOffset), ease:Quad.easeOut});
     }else{
-      TweenMax.to(element, time, {x: ((-width * index)+ diff + containerOffset)});
+      TweenLite.to(element, time, {x: ((-width * index)+ diff + containerOffset), ease:Quad.easeOut});
     }
   };
 
@@ -198,13 +197,19 @@ var slider = function(container, config){
 
   // exported functionality
   var that = {};
+  
+  that.goto = function(to){
+    if(to >= 0 && to < slides.length){
+      animate(+to);
+    }
+  }
+  
   that.next = function(){
-    if(index < slides.length-1){ animate(index+1); }
+    that.goto(index+1);
   };
   
   that.prev = function(){
-    if(index){ animate(index-1); }
+    that.goto(index-1);
   };
-
   return that;
 };
