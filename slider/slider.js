@@ -1,6 +1,8 @@
 /*
- * Requires Lodash.js && TweenMax.js (Greensock)
+ * Slider
+ * Requires Lodash.js && TweenMax.js (GSAP)
  * 
+ * author: Anton Schubert
  * */
 
 var slider = function(container, config){
