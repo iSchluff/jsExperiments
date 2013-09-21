@@ -46,7 +46,7 @@ body {
 #header{
   text-align: center;
   //background: #2075B1;
-  background: darken(@blue,5%);
+  background: darken(@blue,10%);
   white-space: nowrap;
   overflow: hidden;
   margin-bottom: 50px;
@@ -86,9 +86,7 @@ h1 {
 .slide {
   position: relative;
   top: -30px;
-    
   .transition-transform(.3s);
-  
   .backface-visibility(hidden);
   
   p{
@@ -101,12 +99,12 @@ h1 {
     &:first-child{
       .border-top-radius(3px);
       color: white;
-      background: darken(@blue,5%);
+      background: darken(@blue,10%);
     }
     
     &:last-child{
       .border-bottom-radius(3px);
-      color: darken(@blue,5%);
+      color: darken(@blue,10%);
       background: darken(@gray-light,1%);
     }
   }
@@ -121,6 +119,4 @@ html.no-touch .border .slide:hover{
 	.translate(0,30px);
 }
 
-a{
-  text-decoration: none;
-}
+a{text-decoration: none; color: white;}

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML> 
-<html>
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if (gt IE 8)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 <title>Slider</title>
 <meta http-equiv="X-UA-Compatible" content="IE=8">
@@ -65,8 +66,8 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script src='slider.js'></script>
 
-<script>
-window.onload = function(){
+<script type="text/javascript">
+window.onload = function() {
   var elem = document.getElementById('mySwipe');
   window.projects = slider(elem, {
     width: 300
