@@ -9,7 +9,7 @@ Cell.prototype = {
 	update : function (t, c, tc) {
 		this.text = t || "";
 		this.color = c || "#fff";
-		this.textColor = tc || "#eee";
+		this.textColor = tc || "#fff";
 		this.redraw = true;
 	}
 };
@@ -23,7 +23,7 @@ function Grid(c, cellCount) {
 	
 	this.ctx = c.getContext("2d");
 	
-	this.ctx.fillStyle = "#ddd";
+	this.ctx.fillStyle = "#f3f4f5";
 	this.ctx.fillRect(0,0, this.w, this.h);
 	
 	for (var i = 0; i < this.cellCount; i++) {
@@ -41,10 +41,10 @@ Grid.prototype = {
 		this.ctx.fillStyle = "#fff";
 		this.ctx.fillRect(cell.x * (this.cellWidth) , cell.y * (this.cellWidth) , this.cellWidth-1 , this.cellWidth-1);
 		this.ctx.fillStyle = cell.color;
-		this.ctx.fillRect(cell.x * (this.cellWidth)+2 , cell.y * (this.cellWidth)+2 , this.cellWidth-5 , this.cellWidth-5);
+		this.ctx.fillRect(cell.x * (this.cellWidth) , cell.y * (this.cellWidth) , this.cellWidth-1 , this.cellWidth-1);
 		if (cell.text != "") {
 			this.ctx.fillStyle = cell.textColor;
-			this.ctx.font = "16px Tahoma";
+			this.ctx.font = "16px Source Sans Pro";
 			this.ctx.fillText(cell.text, cell.x * this.cellWidth + 8, cell.y * this.cellWidth + 19);
 		}
 	},
