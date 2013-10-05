@@ -6,7 +6,7 @@
   window.requestAnimationFrame = requestAnimationFrame;
 })();
 
-var cube= function(){
+var cube= function(mainContainer, cubeContainer){
   "use strict";
   
   var FILTER=0.6;
@@ -25,7 +25,7 @@ var cube= function(){
   var setup = function(){
     
     //register mouseDown listener
-    $("#cube").mousedown(function(event){ 
+    cubeContainer.mousedown(function(event){ 
       mouseDown=true;
       lastPos[0]=event.pageX;
       lastPos[1]=event.pageY;
@@ -33,7 +33,7 @@ var cube= function(){
       xDiff=0; yDiff=0;
   
        //listen for move Events
-      $("#main").mousemove(function(event){
+      mainContainer.mousemove(function(event){
         xDiff = (lastPos[0]-event.pageX)*3;
         yDiff = (lastPos[1]-event.pageY)*3;
         
@@ -45,10 +45,10 @@ var cube= function(){
       });
       
       // on mouseUp remove movelistener
-      $("#main").mouseup(function onMouseUp(){ 
+      mainContainer.mouseup(function onMouseUp(){ 
         mouseDown=false;
-        $("#main").unbind('mousemove');
-        $("#main").unbind('mouseup');
+        mainContainer.unbind('mousemove');
+        mainContainer.unbind('mouseup');
       });
       
      //start Animating on Click
@@ -92,7 +92,7 @@ var cube= function(){
   };
   
   //render loop
-  function render(){
+  var render= function(){
     
     //stop rendering if nothing happens
     if(mouseDown || (xSpeed!==0 || ySpeed!==0)){
@@ -118,7 +118,6 @@ var cube= function(){
       }else{
           xRot-=xDiff/2.5;
       }
-  
       
       yRot+= yDiff / 2.5;
       xRot+= 360; xRot%= 360; yRot+= 360; yRot%=360;
@@ -158,12 +157,14 @@ var cube= function(){
     
     // Y then X -> Euler Rotation
     var newMat = sourceMat.multiply(Matrix.RotationY(xRot).multiply( Matrix.RotationX(-yRot) ));
-    $("#cube").css("-webkit-transform", mat3ToString(newMat));
-    $("#cube").css("-ms-transform", mat3ToString(newMat));
-    $("#cube").css("transform", mat3ToString(newMat));
-  }
+    cubeContainer[0].style.webkitTransform=
+      cubeContainer[0].style.msTransform=
+      cubeContainer[0].style.transform=mat3ToString(newMat);
+  };
   
   setup();
 };
 
-$(document).ready(cube);
+$(document).ready(function(){
+  cube($("#main"), $("#cube")); 
+});
