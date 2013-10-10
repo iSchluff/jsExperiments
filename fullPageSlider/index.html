@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div id="left" onclick="mySwipe.prev()"><div class="arrowLeft"></div></div>
+  <div id="right" onclick="mySwipe.next()"><div class="arrowRight"></div></div>
+  <div id="main">
+    <div id="slider" class="swipe">
+      <ul class="swipe-wrap">
+        <li>
+          <div class="wrapper">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, veniam, atque, molestiae, expedita quas officia placeat dolor sunt sequi exercitationem deserunt ad nobis magnam debitis quidem dolorum id quisquam ratione provident error. Itaque, ea, reprehenderit quo nostrum fugiat voluptate aperiam porro iusto corporis. Delectus, ullam, voluptate omnis quia distinctio culpa!</div>
+        </li>
+        <li>
+          <div class="wrapper">Sed, dolore consectetur saepe dicta accusantium magni corrupti error distinctio? Ab, omnis perferendis delectus aspernatur perspiciatis sit illum possimus tempora veniam tempore dolor maiores nulla dolore unde eos. Aperiam, aliquam, explicabo, eos a ratione officia voluptatum cumque quo magni dolores repellendus error earum tenetur. Obcaecati, iure ad distinctio totam eius.</div>
+        </li>
+        <li>
+          <div class="wrapper">Omnis, culpa id ipsum sed deleniti ad enim doloribus et sequi accusamus. In voluptatem sint aliquid nihil ex? Illum, eaque, officia, et ut unde numquam molestias eveniet animi cumque autem itaque soluta aspernatur perspiciatis porro repellendus tempore saepe architecto ab neque quam asperiores delectus repellat rem? Iure numquam accusamus facilis!</div>
+        </li>
+        <li>
+          <div class="wrapper">Ducimus, provident, aspernatur doloribus sequi voluptate iste animi beatae deleniti commodi cupiditate fuga laboriosam quam eligendi ex quo dolore nisi voluptas delectus distinctio iure. Beatae, dolore, at, alias sapiente repudiandae nisi doloremque debitis sint officiis pariatur voluptatibus sunt eius. Rerum deserunt nam optio laboriosam cum magni eius eligendi id neque!</div>
+        </li>
+        <li>
+          <div class="wrapper">Ad, officia ex illum excepturi magni veniam nihil dolor ducimus neque deleniti doloribus debitis facilis architecto sapiente at aspernatur quae saepe laboriosam facere autem! Magni, porro, ex, ea aliquam quasi numquam libero quas nesciunt suscipit velit voluptates impedit rerum quod voluptate unde repellat omnis tenetur asperiores accusamus minus voluptatem ad.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.2.1/lodash.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenLite.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/plugins/CSSPlugin.min.js"></script>
+<script src='swipe.js'></script>
+<script>
+
+// pure JS
+var elem = document.getElementById('slider');
+window.mySwipe = fullWidthSlider(elem, {
+  // startSlide: 4,
+  // auto: 3000,
+  // continuous: true,
+  // disableScroll: true,
+  // stopPropagation: true,
+  // callback: function(index, element) {},
+  // transitionEnd: function(index, element) {}
+});
+
+// with jQuery
+// window.mySwipe = $('#mySwipe').Swipe().data('Swipe');
+
+</script>
+</html>
