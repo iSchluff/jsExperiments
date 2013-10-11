@@ -6,8 +6,14 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <div id="left" onclick="mySwipe.prev()"><div class="arrowLeft"></div></div>
-  <div id="right" onclick="mySwipe.next()"><div class="arrowRight"></div></div>
+  <div id="left">
+  <div id="leftBtn" class="glyphicon glyphicon-chevron-left"  onclick="slider.prev()"></div>
+  </div>
+  <div id="right">
+  <div id="rightBtn" class="glyphicon glyphicon-chevron-right"  onclick="slider.next()"></div>
+  <div id="restartBtn" class="glyphicon glyphicon-repeat"  onclick="slider.goTo(0)"></div>
+  </div>
+  
   <div id="main">
     <div id="slider" class="swipe">
       <ul class="swipe-wrap">
@@ -35,23 +41,18 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.2.1/lodash.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenLite.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/plugins/CSSPlugin.min.js"></script>
-<script src='swipe.js'></script>
-<script>
+<script src='slider.js'></script>
 
-// pure JS
-var elem = document.getElementById('slider');
-window.mySwipe = fullWidthSlider(elem, {
-  // startSlide: 4,
-  // auto: 3000,
-  // continuous: true,
-  // disableScroll: true,
-  // stopPropagation: true,
-  // callback: function(index, element) {},
-  // transitionEnd: function(index, element) {}
+<script>
+var container= $("#slider");
+
+window.slider = fullWidthSlider(container);
+container.on("update", function(event, data){
+  $("#leftBtn").css("visibility", data.left ? "hidden" : "visible");
+  $("#rightBtn").css("visibility", data.right ? "hidden" : "visible");
+  $("#restartBtn").css("visibility", data.right ? "visible" : "hidden");
 });
 
-// with jQuery
-// window.mySwipe = $('#mySwipe').Swipe().data('Swipe');
 
 </script>
 </html>

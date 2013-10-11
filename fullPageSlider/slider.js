@@ -4,41 +4,8 @@
  *
  * */
 
-/*global DocumentTouch:false, TweenLite:false, Power3:false */
+/*global DocumentTouch:false, TweenLite:false, Power3:false, _:false */
 /*jshint jquery:true, devel:true, browser:true, curly:true, latedef:true, newcap:true, eqeqeq:true, es3:true, immed:true, undef:true*/
-
-var sliderBase= function(container, options){
-  "use strict";
-
-  var that= {};
-  that.element= container.children[0];
-  that.slides= that.element.children;
-  that.index= 0;
-  
-  // check browser capabilities
-  that.browser = {
-    addEventListener: !!window.addEventListener,
-    touch: ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
-    ie8: (document.documentElement.className==="ie8")
-  };
-  
-  that.animate= function(){};
-  that.goTo = function(to){
-    if(to >= 0 && to < that.slides.length){
-      that.animate(+to, options.transitionTime);
-    }
-  };
-  
-  that.next = function(){
-    that.goTo(that.index+1);
-  };
-  
-  that.prev = function(){
-    that.goTo(that.index-1);
-  };
-  
-  return that;
-};
 
 var fullWidthSlider = function(container, config){
   "use strict";
@@ -49,32 +16,37 @@ var fullWidthSlider = function(container, config){
     disableScroll: true
   }, config);
   
-  var base= sliderBase(container, options);
-  var c= $(container);
-  var element= base.element;
-  var length= base.slides.length;
+  var browser= {
+    addEventListener: !!window.addEventListener,
+    touch: ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
+    ie8: (document.documentElement.className==="ie8")
+  };
+  
+  var element= container[0].children[0];
+  var slides= element.children;
+  var index= 0;
+  var length= slides.length;
   var containerOffset, offset, width;
 
   // moves the slider to current index + parametric offset
   var translate = function(diff, time){
     offset = diff;
     
-    if(base.browser.ie8){
-      TweenLite.to(element, time, {left: -(100*base.index)+"%", ease:Power3.easeOut});
+    if(browser.ie8){
+      TweenLite.to(element, time, {left: -(100*index)+"%", ease:Power3.easeOut});
     }else{
-//      TweenLite.to(element, time, {left: ((diff/width*100)-(100*base.index))+"%", ease:Power3.easeOut});
-      TweenLite.to(element, time, {x: (diff-base.index*width), ease:Power3.easeOut});
+      TweenLite.to(element, time, {x: (diff-index*width), ease:Power3.easeOut});
     }
   };
 
   // animate to index
-  base.animate = function(to, time){
-    base.index= to;
+  var animate = function(to, time){
+    index= to;
     translate(0, time);
-    c.trigger("update", {
-      index: base.index,
-      left: (base.index === 0),
-      right: (base.index === length-1)
+    container.trigger("update", {
+      index: index,
+      left: (index === 0),
+      right: (index === length-1)
     });
   };
 
@@ -141,8 +113,8 @@ var fullWidthSlider = function(container, config){
         // increase resistance if first or last slide
         delta.x =
           delta.x /
-            ( (!base.index && delta.x > 0 ||         // if first slide and sliding left
-               base.index === length - 1 &&    // or if last slide and sliding right
+            ( (!index && delta.x > 0 ||         // if first slide and sliding left
+               index === length - 1 &&    // or if last slide and sliding right
                delta.x < 0                      // and if sliding at all
             ) ?
             ( Math.abs(delta.x) / width + 1 )   // determine resistance level
@@ -163,22 +135,22 @@ var fullWidthSlider = function(container, config){
 
       // determine if slide attempt is past start and end
       var isPastBounds =
-        !base.index && delta.x > 0 ||                      // if first slide and slide amt is greater than 0
-         base.index === length - 1 && delta.x < 0;   // or if last slide and slide amt is less than 0
+        !index && delta.x > 0 ||                      // if first slide and slide amt is greater than 0
+         index === length - 1 && delta.x < 0;   // or if last slide and slide amt is less than 0
 
       // if not scrolling vertically
       if (!isScrolling) {
         if (isValidSlide && !isPastBounds) {
           //determine direction
           if(delta.x < 0){
-            base.animate(base.index +1, options.transitionTime);
+            animate(index +1, options.transitionTime);
           }else{
-            base.animate(base.index -1, options.transitionTime);
+            animate(index -1, options.transitionTime);
           }
 
         // snap back to current slide
         }else{
-          base.animate(base.index, options.transitionTime);
+          animate(index, options.transitionTime);
         }
       }
 
@@ -191,10 +163,10 @@ var fullWidthSlider = function(container, config){
   // Set up Css and Eventlisteners
   var setup = function(){
     // init widths
-    width= c.width();
+    width= container.width();
 
     element.style.width= (length * 100)+"%";
-    _.each(base.slides, function(slide, index){
+    _.each(slides, function(slide, index){
       var s= $(slide);
       s.width((100/length) + "%");
     });
@@ -205,25 +177,35 @@ var fullWidthSlider = function(container, config){
     style.mozBackfaceVisibility =
     style.backfaceVisibility = "hidden";
 
-    if(base.browser.addEventListener && base.browser.touch){
+    if(browser.addEventListener && browser.touch){
       element.addEventListener('touchstart', events, false);
     }
     
     $(window).resize(_.throttle(function(){
-      width= c.width();
+      width= container.width();
       translate(0,0);
     },100));
     
-    container.style.visibility = "visible";
+    container[0].style.visibility = "visible";
   };
 
   setup();
 
   // exported functionality
   var that = {};
-  that.goTo= base.goTo;
-  that.next= base.next;
-  that.prev= base.prev;
-
+  that.goTo = function(to){
+    if(to >= 0 && to < slides.length){
+      animate(+to, options.transitionTime);
+    }
+  };
+  
+  that.next = function(){
+    that.goTo(index+1);
+  };
+  
+  that.prev = function(){
+    that.goTo(index-1);
+  };
+  
   return that;
 };
