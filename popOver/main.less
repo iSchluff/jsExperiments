@@ -1,0 +1,48 @@
+@import "../base.less";
+
+body{
+  width: 70%;
+  margin: 0 auto;
+}
+
+h1{
+  background: @blue;
+  color: white;
+  margin: 0 0 20px 0;
+  padding: 15px;
+  .border-bottom-radius(5px);
+  border-bottom: 3px solid darken(@blue, 10%);
+}
+
+p{
+  text-align: justify;
+}
+
+[data-popover]{
+  color: @blue;
+  position: relative;
+  &:hover{
+    &:before{
+      position: absolute;
+      color: white;
+      font-size: 15px;
+      top: -15px-2*6px-6px;
+      content: attr(data-popover);
+      white-space: nowrap;
+      padding: 6px;
+      background: lighten(@blue,5%);
+      border-bottom: 1px solid darken(@blue, 5%);
+      border-radius: 5px;
+    }
+    
+    &:after{
+      position: absolute;
+      left: 50%;
+      top: -5px;
+      content: " ";
+      border-left: 6px solid transparent;
+	  border-right: 6px solid transparent;
+	  border-top: 6px solid lighten(@blue,5%);
+    }
+  }
+}
