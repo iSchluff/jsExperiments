@@ -7,6 +7,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/> 
 <meta charset="utf-8"/>
 <link href='style.css' rel='stylesheet'/>
+<link href="http://fonts.googleapis.com/css?family=Montserrat|Open+Sans:600" rel="stylesheet" type="text/css">
 <style>
 
 .swipe {
@@ -63,7 +64,7 @@
   <br>
   <form>
   <input type="number" name="input" value="0" min="0" max="20" >
-  <input type="button" class="btn" value="goto" onclick='projects.goto(this.form.input.value)'>
+  <input type="button" class="btn" value="goto" onclick='projects.goTo(this.form.input.value)'>
   </form>
 </div>
 
@@ -77,8 +78,7 @@ window.onload = function() {
   var elem = document.getElementById('mySwipe');
   window.projects = slider(elem, {
     width: 300
-    // auto: 3000,
-    // disableScroll: true,
+    // transitionTime: 0.3,
   });
 }
 </script>

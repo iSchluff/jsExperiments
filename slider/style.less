@@ -1,27 +1,33 @@
 @import "../base.less";
 
+html, body {
+  background: #f3f3f3;
+  text-align:center;
+}
+
 body {
-  -webkit-text-size-adjust:none;
-  font-family:sans-serif;
+  -webkit-text-size-adjust: none;
+  font-family: "Open Sans", sans-serif;
   min-height:416px;
   color: @gray-dark;
 }
 
 h1 {
-  font-size:33px;
+  font-family: Montserrat, sans-serif;
+  font-size: 40px;
   margin:50px 0 15px;
   text-align:center;
   color:#3f3f3f;
 }
 
 h2 {
-  font-size:14px;
+  font-size: 17px;
   color:#4a4a4a;
   margin:20px 10px 10px;
-}
-h2 a{
-  font-size: 14px;
-  margin: 0;
+  a{
+    font-size: 17px;
+    margin: 0;
+  }
 }
 
 input{
@@ -44,26 +50,11 @@ a {
   }
 }
 
-html, body {
-  background: #f3f3f3;
-  text-align:center;
-}
-
 .btn{
   margin-bottom: 20px;
   .button(@blue, white);
   width: 100px;
   display: inline-block;
-}
-
-#console {
-  font-size: 12px;
-  font-family: "Inconsolata", "Monaco", "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-  color: #999;
-  line-height: 18px;
-  margin-top: 20px;
-  max-height: 150px;
-  overflow: auto;
 }
 
 #mySwipe div b {
