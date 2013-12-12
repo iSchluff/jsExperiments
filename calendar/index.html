@@ -1,0 +1,27 @@
+<!doctype html> 
+<html lang="de">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta name="author" content="Anton Schubert"/>
+	<title> JS Calendar </title>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/> 
+	<link rel="stylesheet" href="calendar.css"/>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <h1>Responsive JS Calendar</h1>
+  <div id="container">
+    
+  </div>
+</body>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+<!-- template built with lodash-cli (npm)  -->
+<!-- lodash -m template="./*.ejs" settings="{variable: 'data'}" exports=global -->
+<script src="lodash.template.min.js"></script>
+<script src="calendar.js"></script>
+<script>
+  var cal= window.calendar($("#container"), new Date());
+  
+</script>
+</html>

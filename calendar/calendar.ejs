@@ -1,0 +1,24 @@
+<div class="head">
+  <div class="prev icon icon-left">
+  </div><div class="title"><%= data.title%>
+  </div><div class="next icon icon-right"></div>
+</div>
+
+<div class="dateContainer clearfix">
+<% if(data.layout === "years"){ %>
+  <%  _.each(data.years, function(item){  %>
+    <div class="year <%= item.properties %>"><%= item.name  %></div>
+  <%  });  %>
+<% }else if(data.layout === "months"){ %>
+  <%  _.each(data.months, function(item){  %>
+    <div class="month <%= item.properties %>"><%= item.name  %></div>
+  <%  });  %>
+<% }else{ %>
+  <%  _.each(data.dayTitles, function(item){  %>
+    <div class="dayTitle <%= item.properties %>"><%= item.name  %></div>
+  <%  });  %>
+  <%  _.each(data.days, function(item){  %>
+    <div class="day <%= item.properties %>"><%= item.name  %></div>
+  <%  });  %>
+<% } %>
+</div>
