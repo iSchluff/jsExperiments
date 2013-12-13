@@ -7,8 +7,6 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/> 
 	<link rel="stylesheet" href="main.css"/>
 	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<!--	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400|Ubuntu' rel='stylesheet' type='text/css'>-->
-	<script src="scripts/Modernizr.js"></script> <!-- Detect Touch-Support -->
 </head>
 <body>
 
@@ -17,91 +15,53 @@
 			Web-Experiments
 		</h1>
 	</div>
-	
-
 
 	<div id="main">
-      <div class="box">
-        <div class="border">
-            <a href="../calendar"><div class="slide">
-            <p>Click It</p>
-                <img height="230px" width="230px" src="images/calendar.png"/>
-            <p>Responsive Calendar</p>
-            </div></a>
-        </div>
-      </div>
-      
-      <div class="box">
-        <div class="border">
-            <a href="../popOver"><div class="slide">
-            <p>Hover It</p>
-                <img height="230px" width="230px" src="images/popOver.png"/>
-            <p>Pure CSS Popover</p>
-            </div></a>
-        </div>
-      </div>
-      
-      <div class="box">
-        <div class="border">
-            <a href="../slider"><div class="slide">
-            <p>Swipe It</p>
-                <img height="230px" width="230px" src="images/slider.jpg"/>
-            <p>Slider</p>
-            </div></a>
-        </div>
-      </div>
-		
-<!--
-		<div class="box">
-			<div class="border">
-				<a href="../sidescrollNav"><div class="slide">
-				<p>View on Mobile</p>
-					<img height="230px" width="230px" src="images/sidescrollNav.png"/>
-				<p>Mobile Navigation</p>
-				</div></a>
-			</div>
-		</div>
--->
-		
-		<div class="box">
-			<div class="border">
-				<a href="../hadlock"><div class="slide">
-				<p>Drag / Drop</p>
-					<img height="230px" width="230px" src="images/hadlock.jpg"/>
-				<p>Maze Routing</p>
-				</div></a>
-			</div>
-		</div>
-		
-		<div class="box">
-			<div class="border">
-				<a href="../css3dCube"><div class="slide">
-				<p>Drag It</p>
-					<img height="230px" width="230px" src="images/cube.jpg"/>
-				<p>CSS/JS Cube</p>
-				</div></a>
-			</div>
-		</div>
-
-		<div class="box">
-			<div class="border">
-				<a href="../cssWaveSquares"><div class="slide">
-				<p>Click It</p>
-					<img height="230px" width="230px" src="images/waves.png"/>
-				<p>Waves</p>
-				</div></a>
-			</div>
-		</div>
-
-		<div class="box">
-			<div class="border">
-				<a href="../cssTurnSquares"><div class="slide">
-				<p>Hover It</p>
-					<img height="230px" width="230px" src="images/hover.png"/>
-				<p>Rotating Squares</p>
-				</div></a>
-			</div>
-		</div>
+	  <!-- Template generated html -->
 	</div>
 </body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+<script src="lodash.template.min.js"></script>
+<script>
+  (function(){
+    var projects= [{
+      name: "Responsive Calendar",
+      action: "Click It",
+      image: "images/calendar.png",
+      url: "../calendar"
+    },{
+      name: "CSS3 Popover",
+      action: "Hover It",
+      image: "images/popOver.png",
+      url: "../popOver"
+    },{
+      name: "Responsive Slider",
+      action: "Swipe It",
+      image: "images/slider.jpg",
+      url: "../slider"
+    },{
+      name: "3D-Transform Cube",
+      action: "Drag It",
+      image: "images/cube.jpg",
+      url: "../css3dCube"
+    },{
+      name: "Maze Routing",
+      action: "Drag / Drop",
+      image: "images/hadlock.jpg",
+      url: "../hadlock"
+    },{
+      name: "Waves",
+      action: "Click It",
+      image: "images/waves.png",
+      url: "../cssWaveSquares"
+    },{
+      name: "Rotating Squares",
+      action: "Hover It",
+      image: "images/hover.png",
+      url: "../cssTurnSquares"
+    }];
+    var html= _.templates.box(projects);
+    document.getElementById("main").innerHTML=html;
+  }());
+</script>
 </html>

@@ -1,0 +1,11 @@
+<% _.each(data, function(element){ %>
+<div class="box">
+  <div class="border">
+      <a href="<%= element.url %>"><div class="slide">
+      <p><%= element.action %></p>
+          <img height="230px" width="230px" src="<%= element.image %>"/>
+      <p><%= element.name %></p>
+      </div></a>
+  </div>
+</div>
+<% }); %>
