@@ -21,6 +21,7 @@ p{
 [data-popover]{
   color: @blue;
   position: relative;
+  
   &:hover{
     &:before{
       position: absolute;
@@ -30,7 +31,7 @@ p{
       content: attr(data-popover);
       white-space: nowrap;
       padding: 6px;
-      background: lighten(@blue,5%);
+      background: lighten(@blue, 5%);
       border-bottom: 1px solid darken(@blue, 5%);
       border-radius: 5px;
     }
@@ -42,7 +43,7 @@ p{
       content: " ";
       border-left: 6px solid transparent;
 	  border-right: 6px solid transparent;
-	  border-top: 6px solid lighten(@blue,5%);
+	  border-top: 6px solid lighten(@blue, 5%);
     }
   }
 }
