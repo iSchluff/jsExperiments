@@ -44,6 +44,19 @@ input{
   }
 }
 
+// font path mixin
+.fontPath(@path, @filename, @version){
+  src: url('@{path}@{filename}.eot?@{version}');
+  src: url('@{path}@{filename}.eot?@{version}#iefix') format('embedded-opentype'),
+       url('@{path}@{filename}.woff?@{version}') format('woff'),
+       url('@{path}@{filename}.ttf?@{version}') format('truetype');
+}
+
+.no-flicker(){
+  .backface-visibility(hidden);
+  -webkit-transform: translate3d(0,0,0);
+}
+
 // Utilities
 // -------------------------
 

@@ -1,0 +1,101 @@
+@breakpoint: 800px;
+@font-path: "./fonts/";
+
+
+@import "../base.less";
+@import "icons.less";
+
+
+
+body{
+  color: @gray-dark;
+}
+
+.container{
+  width: 100%;
+  padding: 0 10px;
+  
+  @media screen and (min-width: @breakpoint){
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
+.list-group{
+  padding-left: 0;
+  list-style-type: none;
+  
+  .list-group-item{
+    display: block;
+    .clearfix();
+    
+    padding-bottom: 20px;
+    
+    .colLeft{
+      float: left;
+      width: 20%;
+      min-height: 1;
+      
+      img{
+        max-width: 100%;
+        height: auto;
+      }
+    }
+    
+    .colRight{
+      float: left;
+      width: 80%;
+      min-height: 1;
+      
+      padding-left: 10px;
+//      padding-top: 10px;
+      
+      .title{
+        word-wrap: break-word;
+        font-size: 25px;
+        padding-bottom: 5px;
+        
+        a{
+          color: @gray-dark;
+          text-decoration: none;
+        }
+      }
+      
+      .stars, .forks{
+        padding-bottom: 3px;
+        .icon:before{
+          margin-left: 0;
+        }
+      }
+
+      .description{
+        color: @gray;
+      }
+    }
+    
+    @media screen and (min-width: @breakpoint){
+      padding-bottom: 30px;
+      .colLeft{
+        width: 15%;
+      }
+      
+      .colRight{
+        width: 85%;
+        padding-left: 20px;
+        .title{
+          font-size: 35px;
+          float: left;
+        }
+        
+        .stars, .forks{
+          float: right;
+          clear: right;
+        }
+        
+        .description{
+          clear: both;
+        }
+      }
+    }
+  }
+}

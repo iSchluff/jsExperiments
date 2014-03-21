@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Github Most Popular</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  
+  <div class="container">
+    <h1>Github Most Popular</h1>
+    <ul class="list-group"></ul>
+  </div>
+  
+</body>
+
+<!-- Templates -->
+<script type="text/x-tmpl" id="listTemplate">
+  {% for (var i=0; i<o.items.length; i++) {
+       var item= o.items[i]; %}
+    <li class="list-group-item">
+      <div class="colLeft">
+        <img src="{%=item.owner.avatar_url%}<" alt="">
+      </div>
+      <div class="colRight">
+        <div class="title"><a href="{%=item.html_url%}">{%=item.full_name%}</a></div>
+        <div class="stars"><span class="icon icon-star"></span>{%=item.stargazers_count%}</div>
+        <div class="forks"><span class="icon icon-fork"></span>{%=item.forks_count%}</div>
+        <div class="description">{%=item.description%}</div>
+      </div>
+    </li>
+  {% } %}
+</script>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="tmpl.js"></script>
+<script src="default.js"></script>
+</html>
