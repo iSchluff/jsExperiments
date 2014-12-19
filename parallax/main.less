@@ -1,0 +1,43 @@
+@import "../base.less";
+
+h1{
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  font-size: 60px;
+}
+
+.parallax{
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  max-height: 400px;
+
+  &>.title{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    margin-top: -20px;
+    font-size: 40px;
+    padding: 0 10px;
+    z-index: 1;
+
+    color: white;
+    text-transform: uppercase;
+  }
+
+  &>img{
+    .no-flicker();
+    position: relative;
+    width: 100%;
+
+    @media screen and (max-width: 700px){
+      top: 0 !important;
+      .translate(0, 0) !important;
+    }
+  }
+}
+
+.container{
+  height: 150px;
+}
