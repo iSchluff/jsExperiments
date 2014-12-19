@@ -133,10 +133,10 @@
 
         // Smooth out Animation
         if (!inverted) {
-            xSpeed= xSpeed * (1 -FILTER2) + (nextNumber(xRot) - xRot) * FILTER2;
+            xSpeed= xSpeed * (1 - FILTER2) + (nextNumber(xRot) - xRot) * FILTER2;
             xRot+= xSpeed / 2.5;
         } else {
-            xSpeed= xSpeed * (1 -FILTER2) + (-nextNumber(xRot) + xRot) * FILTER2;
+            xSpeed= xSpeed * (1 - FILTER2) + (-nextNumber(xRot) + xRot) * FILTER2;
             xRot-= xSpeed / 2.5;
         }
 
