@@ -184,15 +184,18 @@ table {
 html,
 body {
   background: white;
-  text-align: center;
+  text-align: left;
 }
 body {
   -webkit-text-size-adjust: none;
   font-family: 'Ubuntu', sans-serif;
   min-height: 416px;
 }
+h3 {
+  padding-left: 20px;
+}
 #main {
-  margin: 100px auto;
+  margin: 100px auto 20px auto;
   max-width: 800px;
 }
 #canvas {

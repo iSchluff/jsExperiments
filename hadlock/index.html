@@ -5,21 +5,27 @@
 	<meta name="author" content="Anton Schubert"/>
 	<title>Hadlocks Algorithm</title>
 	<link rel="stylesheet" href="main.css"/>
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400|Ubuntu' rel='stylesheet' type='text/css'>
-	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> -->
-	<script src="http://localhost/jquery.js"></script>
-	<script src="scripts/state-machine.min.js"></script>
-	<script src="scripts/default.js"></script>
-	<script src="scripts/grid.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400|Ubuntu' rel='stylesheet' type='text/css'>
 </head>
-<body onLoad="init();">
-	<div id="main">
-		<ul id="list">
-			<li id="startBtn">Start</li>
-			<li id="clearBtn">Clear</li>
-			<li id="resetBtn">Reset</li>
-		</ul>
-		<canvas id="canvas" width="800" height="800"></canvas>
-	</div>
+<body>
+  <div id="main">
+    <ul id="list">
+      <li id="startBtn">Start</li>
+      <li id="clearBtn">Clear</li>
+      <li id="resetBtn">Reset</li>
+    </ul>
+    <canvas id="canvas" width="800" height="800"></canvas>
+      <h3>Info</h3>
+      <ul>
+        <li>Drag Start and Target with Mouse</li>
+        <li>Hold mouse and Drag or Click to toggle walls</li>
+      </ul>
+  </div>
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="scripts/state-machine.min.js"></script>
+<script src="scripts/grid.js"></script>
+<script src="scripts/hadlock.js"></script>
+<script src="scripts/default.js"></script>
 </html>
