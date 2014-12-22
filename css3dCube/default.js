@@ -81,15 +81,15 @@
 
     // Get next full front-rotation [0,90,180,270,360]
     var nextNumber= function(wert){
-      var numbers= new Array(0,90,180,270,360); var min= 360;
+      var numbers= new Array(0, 90, 180, 270, 360); var min= 360;
       var diff; var zahl; var index;
       for (var i= 0; i < 5; i++) {
-          zahl= numbers[i];
-          diff= wert-zahl;
-          if (Math.abs(diff) < min) {
-              min= diff;
-              index= i;
-          }
+        zahl= numbers[i];
+        diff= wert - zahl;
+        if (Math.abs(diff) < min) {
+          min= diff;
+          index= i;
+        }
       }
       return numbers[index];
     };
@@ -117,9 +117,9 @@
 
         //invert dragging if the cube is upside down
         if(!inverted){
-            xRot+= xDiff/2.5;
+          xRot+= xDiff/2.5;
         }else{
-            xRot-= xDiff/2.5;
+          xRot-= xDiff/2.5;
         }
 
         yRot+= yDiff / 2.5;
@@ -133,11 +133,11 @@
 
         // Smooth out Animation
         if (!inverted) {
-            xSpeed= xSpeed * (1 - FILTER2) + (nextNumber(xRot) - xRot) * FILTER2;
-            xRot+= xSpeed / 2.5;
+          xSpeed= xSpeed * (1 - FILTER2) + (nextNumber(xRot) - xRot) * FILTER2;
+          xRot+= xSpeed / 2.5;
         } else {
-            xSpeed= xSpeed * (1 - FILTER2) + (-nextNumber(xRot) + xRot) * FILTER2;
-            xRot-= xSpeed / 2.5;
+          xSpeed= xSpeed * (1 - FILTER2) + (-nextNumber(xRot) + xRot) * FILTER2;
+          xRot-= xSpeed / 2.5;
         }
 
         ySpeed= ySpeed * (1-FILTER2) + (nextNumber(yRot)-yRot) * FILTER2;

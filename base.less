@@ -14,20 +14,17 @@
   border-bottom-width: 2px;
   border-color: lighten(@bg, 5%) lighten(@bg, 2%) darken(@bg, 5%);
   .user-select(none);
-  
-  
-  
-  
+
   &:active{
     .box-shadow(inset 0 4px 10px rgba(0,0,0,0.1));
     border-color: darken(@bg, 10%) darken(@bg, 5%) lighten(@bg, 5%) !important;
   }
-  
+
   &:hover{
     cursor: pointer;
     background: darken(@bg, 3%);
   }
-  
+
   &:focus {
 //    outline: none;
 //    border-color: lighten(@bg, 30%);
@@ -165,6 +162,21 @@ input{
   -webkit-transform: translate3d(@x, @y, @z);
           transform: translate3d(@x, @y, @z);
 }
+
+.perspective(@x){
+  -webkit-perspective: @x;
+     -moz-perspective: @x;
+      -ms-perspective: @x;
+          perspective: @x;
+}
+
+.transform-style(@x){
+  -webkit-transform-style: @x;
+     -moz-transform-style: @x;
+      -ms-transform-style: @x;
+          transform-style: @x;
+}
+
 
 // Backface visibility
 // Prevent browsers from flickering when using CSS 3D transforms.
