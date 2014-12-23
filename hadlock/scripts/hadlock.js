@@ -12,7 +12,7 @@
     window.h= this; //debug access
 
     this.g= grid; //grid
-    this.l= []; //labelled Cells (always ordered)
+    this.l= []; //cells to be labelled (always ordered)
     this.source= source; //source cell
     this.target= target; //target cell
     this.walls= walls;
@@ -31,14 +31,20 @@
     //--------------------------- Mark Cells from Source to Target ----------------------------------
     //terminate marking cells when true
     this.reached= false;
-    this.labelAdjacent(source);
+    this.checkAdjacent(source, 0);
 
     //Execute in Single Cells
     this.markCells= (function () {
-      var currentCell= this.l.pop();
-      this.labelAdjacent(currentCell);
+      var item= this.l.pop();
+      var labelled= item[0].labelled;
+      this.checkAdjacent(item[0], item[1]);
       if (!this.reached) {
-        setTimeout(this.markCells, 20);
+        if(labelled){
+          setTimeout(this.markCells(), 0);
+        }else{
+          setTimeout(this.markCells, 20);
+        }
+
         requestAnimationFrame(enterFrame);
       } else {
         requestAnimationFrame(enterFrame);
@@ -83,54 +89,65 @@
   }
 
   Hadlock.prototype= {
-    labelAdjacent: function (cell) {
-      for (var i= 1; i <= 4; i++) { //create / label cell in every direction
-        this.labelCell(this.getAdjacentCell(cell, i, true), cell);
-        if(cell !== this.source){
-          this.g.getCell(cell.x, cell.y).update(cell.value.toString(), "#c2e0f6", "#56656c");
+
+    // create cells in every direction and add to labelling list
+    checkAdjacent: function(cell, value){
+      this.labelCell(cell, value);
+
+      for (var i= 1; i <= 4; i++) {
+        var adj= this.getAdjacentCell(cell, i, true);
+
+        if(!adj || adj.labelled){ continue; }
+        var adjValue= cell.value + this.towards(cell, adj, this.target);
+
+        if(adj !== this.source){
+          this.g.getCell(adj.x, adj.y).update(adjValue.toString(), "#c2e0f6", "#56656c");
+        }
+
+        // try to progress in a straight line
+        if (this.l.length !== 0 && this.l[this.l.length - 1][1] === adjValue) {
+          this.l.push([adj, adjValue]);
+        } else {
+          // find correct spot for insertion
+          var pos= this.binSearch(adjValue);
+          this.l.splice(pos, 0, [adj, adjValue]);
         }
       }
     },
     printCellValues: function () {
       var a = [];
       for (var i = 0; i < this.l.length; i++) {
-        a.push(this.l[i].value);
+        a.push(this.l[i][1]);
       }
+      console.log(a);
     },
     createCell: function (x, y) {
       var cell= new HadlockCell(x, y);
       this.map[x][y]= cell;
       return cell;
     },
-    labelCell: function (cell, prevCell) {
+    labelCell: function (cell, value) {
       if (cell && !cell.labelled) {
-
         //give the cell its value (label it)
-        cell.value = prevCell.value + this.towards(prevCell, cell);
-        cell.labelled = true;
+        cell.value= value;
+        cell.labelled= true;
 
-        //visualize
+        // check for target
         if(cell === this.target){
           this.reached= true;
           console.log("target labelled");
+
+        // visualize
         }else{
           this.g.getCell(cell.x, cell.y).update(cell.value.toString(), "#d5fab5", "#56656c");
         }
-
-        //insert into labelled list
-        if (this.l.length !== 0 && this.l[this.l.length - 1].value === cell.value) { //try to progress in a straight line
-          this.l.push(cell);
-        } else {
-          var pos = this.binSearch(cell.value); //search for the right position for insert
-          this.l.splice(pos, 0, cell); //insert
-        }
       }
     },
-    towards: function (cell, adjacentCell) { //1 if farther away / 0 if closer
-      if (cell.x == adjacentCell.x) {
-        return Math.abs(this.target.y - adjacentCell.y) < Math.abs(this.target.y - cell.y) ? 0 : 1;
+    towards: function (cell, adjacentCell, target) { //1 if farther away / 0 if closer
+      if (cell.x === adjacentCell.x) {
+        return Math.abs(target.y - adjacentCell.y) < Math.abs(target.y - cell.y) ? 0 : 1;
       } else {
-        return Math.abs(this.target.x - adjacentCell.x) < Math.abs(this.target.x - cell.x) ? 0 : 1;
+        return Math.abs(target.x - adjacentCell.x) < Math.abs(target.x - cell.x) ? 0 : 1;
       }
     },
 
@@ -169,8 +186,8 @@
 
     //move 1 cell towards the source
     move: function (cell) {
-      this.xDiff= cell.x- this.currCell.x;
-      this.yDiff= cell.y- this.currCell.y;
+      this.xDiff= cell.x - this.currCell.x;
+      this.yDiff= cell.y - this.currCell.y;
       this.currValue= cell.value;
       this.currCell= cell;
       return cell;
@@ -181,10 +198,15 @@
 
       // move in a straight line
       if (this.state === 1) {
-        if (!this.badCoords(this.currCell.x + this.xDiff, this.currCell.y + this.yDiff) && this.map[this.currCell.x + this.xDiff][this.currCell.y + this.yDiff]) {
-          var newCell = this.map[this.currCell.x + this.xDiff][this.currCell.y + this.yDiff];
+        var x= this.currCell.x + this.xDiff;
+        var y= this.currCell.y + this.yDiff;
+        if (!this.badCoords(x, y) &&
+             this.map[x][y]) {
+          var newCell= this.map[x][y];
 
-          if (newCell.value <= this.currValue) {
+          console.log("towards", this.towards(this.currCell, newCell, this.source))
+
+          if (newCell.labelled && newCell.value <= this.currValue && this.towards(newCell, this.currCell, this.source)) {
             return newCell;
           }
         }
@@ -198,23 +220,31 @@
         this.path.push(this.currCell);
         this.state= 1;
         var arr= [];
-        for (var i= 1; i <= 4; i++) { //create / label cell in every direction
+
+        // get adjacent cells
+        for (var i= 1; i <= 4; i++) {
           var adjCell= this.getAdjacentCell(this.currCell, i, false);
           // if(adjCell){
           // 	this.g.getCell(adjCell.x, adjCell.y).update(adjCell.value.toString(), "#e36941");
           // }
-          requestAnimationFrame(enterFrame);
-          if (adjCell && adjCell.value <= this.currValue && (adjCell.x != this.currCell.x - this.xDiff || adjCell.y != this.currCell.y - this.yDiff) ) {
+          // requestAnimationFrame(enterFrame);
+          if (adjCell && adjCell.labelled &&
+              adjCell.value <= this.currValue &&
+
+             // FIXME this breaks things if moving away from source: choose another direction
+             (adjCell.x !== this.currCell.x - this.xDiff ||
+              adjCell.y !== this.currCell.y - this.yDiff)){
+
             arr.push(adjCell);
           }
         }
 
-
-        requestAnimationFrame(enterFrame);
         for(i= 0; i < arr.length; i++){
           var cell= arr[i];
 
-          if(this.towards(this.currCell, cell)){
+          console.log(cell, this.towards(this.currCell, cell, this.source));
+
+          if(this.towards(cell, this.currCell, this.source)){
             return cell;
           }
         }
@@ -230,11 +260,11 @@
       i;
       while(low <= high) {
         i= Math.floor((low + high) / 2);
-        if (this.l[i].value > find) {
+        if (this.l[i][1] > find) {
           low= i + 1;
           continue;
         }
-        if(this.l[i].value < find) {
+        if(this.l[i][1] < find) {
           high= i - 1;
           continue;
         }
