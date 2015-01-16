@@ -4,136 +4,150 @@
 	window.requestAnimationFrame = requestAnimationFrame;
 })();
 
-function init() {
-	/* CONSTANTS */
-	COLOR_DEAD = "fff";
-	COLOR_ALIVE = "";
-	
-	FSM = StateMachine.create({
-			initial : "stopped",
-			events : [{
-					name : "start",
-					from : "stopped",
-					to : "running"
-				}, {
-					name : "stop",
-					from : "*",
-					to : "stopped"
-				}, {
-				name : "startDraw",
-				from : "init",
-				to : "draw"
+(function(){
+	function init() {
+		/* CONSTANTS */
+		COLOR_DEAD = "#fff";
+		COLOR_ALIVE = "#777";
+
+		FSM = StateMachine.create({
+				initial : "stopped",
+				events : [{
+						name : "start",
+						from : "stopped",
+						to : "running"
+					}, {
+						name : "stop",
+						from : "*",
+						to : "stopped"
+					}, {
+					name : "startDraw",
+					from : "init",
+					to : "draw"
+					}
+				]
+			});
+
+		/* Create Objects */
+		var size = 200;
+		var canvas = document.getElementById("canvas");
+
+		var grid = new Grid(canvas, size);
+		//0 dies 1 born 2 alive
+		// 12345/3 Rule
+		var life = new Life(grid, function (n) {
+			return (n > 0 && n < 6) ? (n === 3 ? 1 : 2) : 0;
+		});
+
+		/* Create Event Listeners */
+		document.getElementById("startBtn").addEventListener("click",function(){
+			console.log("start", FSM.can("start"))
+			if(FSM.can("start")){
+				life.start();
+			}
+		});
+	}
+
+	/* Moore Neighborhood */
+	function Life(grid, neighborfunction) {
+		this.cells= [];
+		this.grid= grid;
+		this.getNextCellValue= neighborfunction;
+	}
+
+	Life.prototype = {
+		start: function(){
+			FSM.start();
+			var iterations= 0;
+			var finished= false;
+
+			var render= function(){ //renderloop
+				if(!finished){
+					finished= !this.grid.redraw();
+					requestAnimationFrame(render);
 				}
-			]
-		});
-	
-	/* Create Objects */
-	var size = 30;
-	var canvas = document.getElementById("canvas");
-	
-	var grid = new Grid(canvas, size);
-	var life = new Life(grid, function (n) { //0 die 1 born 2 alive
-			return (n > 0 && n < 6) ? (n == 3 ? 1 : 2) : 0;
-		});
-	
-	/* Setup Animation Loop */
-	var enterFrame = function () {
-		if (FSM.is("running")) {
-			life.step();
-		}
-		if (grid.redraw()) {
-			requestAnimationFrame(enterFrame);
-		}
-	}
-	
-	/* Create Event Listeners */
-	document.getElementById("startBtn").addEventListener("click",function(){
-		if(FSM.can("start")){
-			FSM.start();
-			requestAnimationFrame(enterFrame);
-		}
-	});
-	
-	document.getElementById("clearBtn").addEventListener("click",function(){
-		life.clear();
-		if(FSM.can("start")){
-			FSM.start();
-		}
-		requestAnimationFrame(enterFrame);
-	});
-	
-	document.getElementById("canvas").addEventListener("mousedown",handleMouse);
-	document.getElementById("canvas").addEventListener("mouseup",handleMouse);
-	document.getElementById("canvas").addEventListener("mousemove",handleMouse);
-}
+			}.bind(this);
 
-function handleMouse(event) {
-	var pos = grid.getMouseOver(event.pageX, event.pageY);
-	if (event.type == "mousedown" && fsm.is("stopped")) {
-		fsm.startDraw(pos);
-	} else if (event.type == "mouseup" || event.type == "touchend") {
-		fsm.stop();
-	} else if ((event.type == "mousemove" || event.type == "touchmove") && pos.x >= 0 && pos.y >= 0 && pos.x < grid.cellCount && pos.y < grid.cellCount) {
-		if (fsm.is("drag") && walls[pos.x][pos.y] == 0) {
-			grid.getCell(dragObj.x, dragObj.y).update();
-			walls[dragObj.x][dragObj.y] = 0;
-			dragObj.x = pos.x;
-			dragObj.y = pos.y;
-			dragObj == s ? grid.getCell(pos.x, pos.y).update("S", "259238") : grid.getCell(pos.x, pos.y).update("T", "BF3A30");
-			walls[pos.x][pos.y] = 2;
-		} else if (fsm.is("draw") && walls[pos.x][pos.y] != 2) {
-			walls[pos.x][pos.y] = drawMode;
-			drawMode ? grid.getCell(pos.x, pos.y).update("", "555") : grid.getCell(pos.x, pos.y).update();
-		}
-	}
-	requestAnimationFrame(enterFrame);
-}
+			var run= function(){ // runloop
+				var now= Date.now();
+				this.step();
 
-/* Moore Neighborhood */
-function Life(grid, neighborfunction) {
-	this.cells = new Array();
-	this.grid = grid;
-	this.getNextCellValue = neighborfunction;
-	this.clear();
-}
+				if(!finished){
+					finished= ++iterations > this.cells.length*4;
+					setTimeout(run, 4);
+				}else{
+					console.log("stop", iterations);
+					FSM.stop();
+				}
+			}.bind(this);
 
-Life.prototype = {
-	step : function () {
-		for (var i = 0; i < this.cells.length; i++) {
-			for (var j = 0; j < this.cells.length; j++) {
-				var val = this.cells[i][j];
-				var rule = this.getNextCellValue(this.countNeighbors(i, j));
-				var newVal= (val == 0) ? (rule == 1 ? 1 : 0) : (rule == 2 ? 1 : 0);
-				if(newVal!=val){
-					this.getCell[i][j]=newVal;
-					this.grid.getCell(i, j).update(newVal ? COLOR_ALIVE : COLOR_DEAD);
+			this.clear();
+			this.grid.redraw();
+			setTimeout(function(){
+				run();
+				requestAnimationFrame(render);
+			}, 500);
+		},
+		step : function () {
+			var next= [];
+			var size= this.cells.length;
+			for (var i= 0; i < size; i++) {
+				next.push([]);
+				for (var j= 0; j < size; j++) {
+					if(i === 0 || j === 0 || i === size-1 || j === size-1){
+						next[i][j]= 0; continue;
+					}
+
+					var val= this.cells[i][j];
+					var count= this.countNeighbors(i, j);
+					var rule= this.getNextCellValue(count);
+					var newVal= (val === 1) ? (rule > 0 ? 1 : 0) : (rule === 1 ? 1 : 0);
+
+					if(newVal !== val){
+						this.grid.getCell(i, j).update("", newVal ? COLOR_ALIVE : COLOR_DEAD);
+					}
+					next[i][j]= newVal;
+				}
+			}
+			this.cells= next;
+		},
+
+		countNeighbors : function (i, j) {
+			var sum= this.cells[i-1][j] + this.cells[i+1][j];
+			sum+= this.cells[i][j-1] + this.cells[i][j+1];
+			sum+= this.cells[i-1][j-1] + this.cells[i-1][j+1];
+			sum+= this.cells[i+1][j-1] + this.cells[i+1][j+1];
+			return sum;
+		},
+
+		clear : function(){
+			var size= this.grid.cellCount;
+			var lowerCenter= Math.round(size/2) - 3;
+			var upperCenter= Math.round(size/2) + 3;
+			console.log("mid", lowerCenter, upperCenter);
+
+			for (var i = 0; i < size; i++) {
+				this.cells[i] = new Array();
+				for (var j = 0; j < size; j++) {
+
+					// outer walls
+					if(i === 0 || j === 0 || i === size-1 || j === size-1){
+						this.cells[i][j]= 0;
+					}else{
+						// starting zone
+						if(i>lowerCenter && i<upperCenter && j>lowerCenter && j<upperCenter){
+							this.cells[i][j]= Math.random()> 0.5 ? 1 : 0;
+
+						}else{
+							this.cells[i][j]= 0;
+						}
+					}
+
+					this.grid.getCell(i, j).update("", this.cells[i][j] ? COLOR_ALIVE : COLOR_DEAD);
 				}
 			}
 		}
-	},
-	
-	countNeighbors : function (i, j) {
-		var sum = this.getValue(i - 1, j) + this.getValue(i + 1, j); //horizontal
-		sum += this.getValue(i, j - 1) + this.getValue(i, j + 1); //vertical
-		sum += this.getValue(i + 1, j + 1) + this.getValue(i - 1, j - 1); //diagonal 1
-		sum += this.getValue(i - 1, j + 1) + this.getValue(i + 1, j - 1); //diagonal 2
-		return sum;
-	},
-	
-	getValue : function (i, j) {
-		if (i < 0 || i >= this.cells.length || j < 0 || j >= this.cells.length) {
-			return 0;
-		} else {
-			return this.cells[i][j];
-		}
-	},
-	
-	clear : function(){
-		for (var i = 0; i < this.grid.cellCount; i++) {
-			this.cells[i] = new Array();
-			for (var j = 0; j < this.grid.cellCount; j++) {
-				this.cells[i][j] = 0;
-			}
-		}
 	}
-}
+
+	init();
+}());

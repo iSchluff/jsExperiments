@@ -1,0 +1,43 @@
+@import "../base.less";
+
+html, body {
+	background: white;
+	text-align: left;
+}
+
+body {
+	-webkit-text-size-adjust: none;
+	font-family: 'Ubuntu', sans-serif;
+	min-height: 416px;
+}
+
+h3{
+	padding-left: 20px;
+}
+#main{
+	margin: 100px auto 20px auto;
+	max-width: 800px;
+}
+
+#canvas{
+	border: 3px solid darken(@gray-light,5%);
+	border-radius: 3px;
+}
+
+#list{
+	list-style-type: none;
+	background: #fff;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+#list li{
+	.button(lighten(@gray, 15%), white);
+	float:left;
+	font-size: 1.5em;
+	margin: 0 10px 20px 10px;
+
+	&:first-child{
+		margin-left:0;
+	}
+}
