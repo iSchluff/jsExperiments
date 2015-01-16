@@ -48,12 +48,11 @@
 <script src="calendar.js"></script>
 <script>
 	var element= document.getElementById("calendar");
-  var cal= calendar(element, new Date());
-	element.addEventListener(cal.events.SELECTDAY, function(event){
+	element.addEventListener("selectday", function(event){
 		console.log("select Day Event", event.detail);
 	});
 
-	element.addEventListener(cal.events.SELECTMONTH, function(event){
+	element.addEventListener("selectmonth", function(event){
 		// random event days
 		var eventDays= [];
 		for(var i=0; i<event.detail.date.getDate(); i++){
@@ -61,6 +60,9 @@
 		}
 		cal.setEventDays(eventDays);
 	});
+
+  var cal= calendar(element, new Date());
+
 
 </script>
 </html>

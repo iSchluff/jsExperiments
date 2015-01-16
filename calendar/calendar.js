@@ -264,16 +264,12 @@ window.calendar = function(container, startDate){
   };
 
 
-  var that= {
-    events: events
-  };
+  var that= {};
 
   // highlights days with events
   that.setEventDays= function(eventDays){
     var days= document.querySelectorAll(".calendar .day:not(.prev):not(.next)");
-    console.log(days);
     for(var i=0; i<days.length; i++){
-      console.log(eventDays[i]);
       if(eventDays[i]){
         days[i].classList.add("event");
       }
@@ -289,5 +285,6 @@ window.calendar = function(container, startDate){
   container.classList.add("calendar");
   container.addEventListener("click", handleEvent);
   render();
+
   return that;
 };
