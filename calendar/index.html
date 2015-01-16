@@ -47,7 +47,20 @@
 <!-- lodash -m template="./*.ejs" settings="{variable: 'data'}" exports=global -->
 <script src="calendar.js"></script>
 <script>
-  var cal= window.calendar(document.getElementById("calendar"), new Date());
+	var element= document.getElementById("calendar");
+  var cal= calendar(element, new Date());
+	element.addEventListener(cal.events.SELECTDAY, function(event){
+		console.log("select Day Event", event.detail);
+	});
+
+	element.addEventListener(cal.events.SELECTMONTH, function(event){
+		// random event days
+		var eventDays= [];
+		for(var i=0; i<event.detail.date.getDate(); i++){
+			eventDays[i]= (Math.random() > 0.5);
+		}
+		cal.setEventDays(eventDays);
+	});
 
 </script>
 </html>

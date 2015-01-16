@@ -76,14 +76,16 @@ window.calendar = function(container, startDate){
   var currentDecadeStart= date.getFullYear() - date.getFullYear() % 10;
 
   var events= {
-    SELECT: "select",
+    SELECTDAY: "selectday",
+    SELECTMONTH: "selectmonth",
+    SELECTYEAR: "selectyear"
   };
 
+  // trigger Custom Event
   var trigger= function(eventType, data){
-    if(eventType === events.SELECT && data === "day"){
-      console.log("triggered", eventType, date);
-    }
-    var event= new CustomEvent(eventType);
+    data= data || {};
+    data.date= date;
+    var event= new CustomEvent(eventType, {detail: data});
     container.dispatchEvent(event);
   };
 
@@ -193,19 +195,20 @@ window.calendar = function(container, startDate){
         date.setFullYear(date.getFullYear() + direction);
         render();
 
-        trigger(events.SELECT, "year");
+        trigger(events.SELECTYEAR);
         break;
       default:
-        date.setMonth(date.getMonth() + direction);
+        date.setMonth(date.getMonth() + direction + 1);
+        date.setDate(0);
         render();
-        trigger(events.SELECT, "month");
+        trigger(events.SELECTMONTH);
     }
   };
 
   var switchLayout= function(layout){
     // update decade
     if(layout === "years"){
-      currentDecadeStart= date.getFullYear()-date.getFullYear()%10;
+      currentDecadeStart= date.getFullYear() - date.getFullYear()%10;
     }
     currentLayout = layout;
     render();
@@ -233,17 +236,17 @@ window.calendar = function(container, startDate){
     }else if(el.classList.contains("year")){
       date.setYear(el.textContent);
       switchLayout("months");
-      trigger(events.SELECT, "year");
+      trigger(events.SELECTYEAR);
 
     }else if(el.classList.contains("month")){
       date.setMonth(domHelper.index(el));
       switchLayout("days");
-      trigger(events.SELECT, "month");
+      trigger(events.SELECTMONTH);
 
     // click on already selected day
     }else if(el.classList.contains("day") && el.classList.contains("selected")){
       el.classList.remove("selected");
-      trigger(events.SELECT, "month");
+      trigger(events.SELECTMONTH);
 
     }else if(el.classList.contains("day")){
       date.setDate(el.textContent);
@@ -256,24 +259,28 @@ window.calendar = function(container, startDate){
         }
       });
 
-      trigger(events.SELECT, "day");
+      trigger(events.SELECTDAY);
     }
   };
 
 
-  var that= {};
+  var that= {
+    events: events
+  };
 
   // highlights days with events
   that.setEventDays= function(eventDays){
-    var days= document.querySelectorAll(".calendar .day:not(.prev, .next)");
+    var days= document.querySelectorAll(".calendar .day:not(.prev):not(.next)");
+    console.log(days);
     for(var i=0; i<days.length; i++){
+      console.log(eventDays[i]);
       if(eventDays[i]){
         days[i].classList.add("event");
       }
     }
   };
 
-  // requests an calendar at a specific date
+  // requests a calendar at a specific date
   that.setDate= function(resetDate){
     date= resetDate;
     render();
