@@ -4,7 +4,7 @@
 window.locale= {
   lang: "en",
   monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-  dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  dayNames: [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 };
 
 // Simple JavaScript Templating
@@ -131,7 +131,7 @@ window.calendar = function(container, startDate){
       data.days = [];
 
       // days of previous month
-      var prevDays = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+      var prevDays = new Date(date.getFullYear(), date.getMonth(), 0).getDay();
       prevDays = prevDays === 0 ? 7 : prevDays;
 
       var prevDayCount = this.daysInMonth(date.getFullYear(), date.getMonth()-1);
