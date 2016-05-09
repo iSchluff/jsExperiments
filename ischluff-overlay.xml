@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<layman>
+  <overlay
+      name = "ischluff-overlay"
+      status = "official"
+      contact = "ischluff@mailbox.org"
+      src = "git@cookie-factory.de:ischluff-overlay"
+      type = "git">
+    <link>git@cookie-factory.de:ischluff-overlay</link>
+    <description>iSchluff's Gentoo Overlay</description>
+  </overlay>
+</layman>
