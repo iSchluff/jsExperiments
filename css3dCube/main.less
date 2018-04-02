@@ -37,26 +37,29 @@ body {
     }
 
     figure{
-      display: block;
+      display: table;
       position: absolute;
+      overflow: hidden;
       .backface-visibility(hidden);
 
       /* Background / Size of the Planes */
       &.fronto, &.backo, &.righto, &.lefto {
+        background-color: @innerColor;
         #gradient.horizontal(@innerColor, darken(@innerColor, 3%), 0%, 100%);
         border: 1px solid @innerColor;
         color: @outerColor;
-        -webkit-text-stroke: @outerColor 1px; /* Fix chrome font rendering */
+        // -webkit-text-stroke: @outerColor 1px; /* Fix chrome font rendering */
         width: 301px;
         height: 301px;
         outline: 1px solid transparent;
       }
 
       &.fronti, &.backi, &.righti, &.lefti {
+        background-color: @outerColor;
         #gradient.horizontal(@outerColor, darken(@outerColor, 3%), 0%, 100%);
         border: 1px solid transparent;
         color: @innerColor;
-        -webkit-text-stroke: @innerColor 1px; /* Fix chrome font rendering */
+        // -webkit-text-stroke: @innerColor 1px; /* Fix chrome font rendering */
         width: 300px;
         height: 300px;
       }
@@ -65,7 +68,6 @@ body {
         width: 302px;
         height: 302px;
         background-color: rgba(1, 1, 1, 0);
-        color: rgba(1, 1, 1, 0);
       }
     }
   }
@@ -74,50 +76,56 @@ body {
 /* Build the Cube */
 
 /* Webkit */
-#cube .fronto  { -webkit-transform: translateZ( 150px );}
-#cube .backo   { -webkit-transform: rotateY( 180deg ) translateZ(  150px );}
-#cube .righto  { -webkit-transform: rotateY(  90deg ) translateZ(  150px );}
-#cube .lefto   { -webkit-transform: rotateY( -90deg ) translateZ(  150px );}
-#cube .fronti  { -webkit-transform: rotateY( 180deg ) translateZ( -149px ) translateX(-1px);}
-#cube .backi   { -webkit-transform: translateZ( -149px ) translateX(1px);}
-#cube .righti  { -webkit-transform: rotateY( -90deg ) translateZ( -149px );}
-#cube .lefti   { -webkit-transform: rotateY(  90deg ) translateZ( -149px );}
-#cube .top		 { -webkit-transform: rotateX(  90deg )	translateZ(  150px );}
-#cube .bottom	 { -webkit-transform: rotateX( -90deg )	translateZ(  150px );}
+#cube .fronto { -webkit-transform: translate3d(0,0,150px);}
+#cube .backo  { -webkit-transform: rotate3d(0,1,0,180deg) translate3d(0,0, 150px); }
+#cube .righto { -webkit-transform: rotate3d(0,1,0, 90deg) translate3d(0,0, 150px); }
+#cube .lefto  { -webkit-transform: rotate3d(0,1,0,-90deg) translate3d(0,0, 150px); }
+#cube .fronti { -webkit-transform: rotate3d(0,1,0,180deg) translate3d(-1px,0,-149px); }
+#cube .backi  { -webkit-transform: translate3d(1px,0,-149px); }
+#cube .righti { -webkit-transform: rotate3d(0,1,0,-90deg) translate3d(0,0,-149px); }
+#cube .lefti  { -webkit-transform: rotate3d(0,1,0, 90deg) translate3d(0,0,-149px); }
+#cube .top    { -webkit-transform: rotate3d(1,0,0, 90deg) translate3d(0,0, 150px); }
+#cube .bottom { -webkit-transform: rotate3d(1,0,0,-90deg) translate3d(0,0, 150px); }
 
-/* IE */
-#cube .fronto  { -ms-transform: translateZ( 150px );}
-#cube .backo   { -ms-transform: rotateY( 180deg ) translateZ(  150px );}
-#cube .righto  { -ms-transform: rotateY(  90deg ) translateZ(  150px );}
-#cube .lefto   { -ms-transform: rotateY( -90deg ) translateZ(  150px );}
-#cube .fronti  { -ms-transform: rotateY( 180deg ) translateZ( -149px ) translateX(-1px);}
-#cube .backi   { -ms-transform: translateZ( -149px ) translateX(1px);}
-#cube .righti  { -ms-transform: rotateY( -90deg ) translateZ( -149px );}
-#cube .lefti   { -ms-transform: rotateY(  90deg ) translateZ( -149px );}
-#cube .top      { -ms-transform: rotateX(  90deg )	translateZ(  150px );}
-#cube .bottom   { -ms-transform: rotateX( -90deg )	translateZ(  150px );}
+// /* IE */
+#cube .fronto { -ms-transform: translate3d(0,0,150px);}
+#cube .backo  { -ms-transform: rotate3d(0,1,0,180deg) translate3d(0,0, 150px); }
+#cube .righto { -ms-transform: rotate3d(0,1,0, 90deg) translate3d(0,0, 150px); }
+#cube .lefto  { -ms-transform: rotate3d(0,1,0,-90deg) translate3d(0,0, 150px); }
+#cube .fronti { -ms-transform: rotate3d(0,1,0,180deg) translate3d(-1px,0,-149px); }
+#cube .backi  { -ms-transform: translate3d(1px,0,-149px); }
+#cube .righti { -ms-transform: rotate3d(0,1,0,-90deg) translate3d(0,0,-149px); }
+#cube .lefti  { -ms-transform: rotate3d(0,1,0, 90deg) translate3d(0,0,-149px); }
+#cube .top    { -ms-transform: rotate3d(1,0,0, 90deg) translate3d(0,0, 150px); }
+#cube .bottom { -ms-transform: rotate3d(1,0,0,-90deg) translate3d(0,0, 150px); }
 
 /* Firefox + Future Browsers */
-#cube .fronto  { transform: translateZ( 150px );}
-#cube .backo   { transform: rotateY( 180deg ) translateZ(  150px );}
-#cube .righto  { transform: rotateY(  90deg ) translateZ(  150px );}
-#cube .lefto   { transform: rotateY( -90deg ) translateZ(  150px );}
-#cube .fronti  { transform: rotateY( 180deg ) translateZ( -149px ) translateX(-1px);}
-#cube .backi   { transform: translateZ( -149px ) translateX(1px);}
-#cube .righti  { transform: rotateY( -90deg ) translateZ( -149px );}
-#cube .lefti   { transform: rotateY(  90deg ) translateZ( -149px );}
-#cube .top      { transform: rotateX(  90deg )	translateZ(  150px );}
-#cube .bottom   { transform: rotateX( -90deg )	translateZ(  150px );}
+#cube .fronto { transform: translate3d(0,0,150px);}
+#cube .backo  { transform: rotate3d(0,1,0,180deg) translate3d(0,0, 150px); }
+#cube .righto { transform: rotate3d(0,1,0, 90deg) translate3d(0,0, 150px); }
+#cube .lefto  { transform: rotate3d(0,1,0,-90deg) translate3d(0,0, 150px); }
+#cube .fronti { transform: rotate3d(0,1,0,180deg) translate3d(-1px,0,-149px); }
+#cube .backi  { transform: translate3d(1px,0,-149px); }
+#cube .righti { transform: rotate3d(0,1,0,-90deg) translate3d(0,0,-149px); }
+#cube .lefti  { transform: rotate3d(0,1,0, 90deg) translate3d(0,0,-149px); }
+#cube .top    { transform: rotate3d(1,0,0, 90deg) translate3d(0,0, 150px); }
+#cube .bottom { transform: rotate3d(1,0,0,-90deg) translate3d(0,0, 150px); }
 
-#cube { -ms-transform: translateZ( -150px ); -webkit-transform: translateZ( -150px ); transform: translateZ( -150px ); }
+#cube {
+  -webkit-transform: translate3d(0,0,-150px);
+      -ms-transform: translate3d(0,0,-150px);
+          transform: translate3d(0,0,-150px);
+}
 
 /* Text */
 figure .text {
+  display: table-cell;
   text-align: center;
   vertical-align: middle;
   padding-top: 10px;
-  font-size: 6em;
+  font-size: 5em;
   font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 
 #rightot {

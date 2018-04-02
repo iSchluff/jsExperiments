@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url('../assets/fonts/montserrat-bold-webfont.woff2') format('woff2'), url('../assets/fonts/montserrat-bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url('../assets/fonts/montserrat-regular-webfont.woff2') format('woff2'), url('../assets/fonts/montserrat-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 input {
   margin: 5px !important;
 }
@@ -219,8 +231,9 @@ body {
   cursor: move;
 }
 #main #cube figure {
-  display: block;
+  display: table;
   position: absolute;
+  overflow: hidden;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -230,6 +243,7 @@ body {
 #main #cube figure.backo,
 #main #cube figure.righto,
 #main #cube figure.lefto {
+  background-color: #ffffff;
   background-image: -webkit-gradient(linear, 0% top, 100% top, from(#ffffff), to(#f7f7f7));
   background-image: -webkit-linear-gradient(left, color-stop(#ffffff 0%), color-stop(#f7f7f7 100%));
   background-image: -moz-linear-gradient(left, #ffffff 0%, #f7f7f7 100%);
@@ -238,8 +252,6 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff7f7f7', GradientType=1);
   border: 1px solid #ffffff;
   color: #e36941;
-  -webkit-text-stroke: #e36941 1px;
-  /* Fix chrome font rendering */
   width: 301px;
   height: 301px;
   outline: 1px solid transparent;
@@ -248,6 +260,7 @@ body {
 #main #cube figure.backi,
 #main #cube figure.righti,
 #main #cube figure.lefti {
+  background-color: #e36941;
   background-image: -webkit-gradient(linear, 0% top, 100% top, from(#e36941), to(#e15e34));
   background-image: -webkit-linear-gradient(left, color-stop(#e36941 0%), color-stop(#e15e34 100%));
   background-image: -moz-linear-gradient(left, #e36941 0%, #e15e34 100%);
@@ -256,8 +269,6 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe36941', endColorstr='#ffe15e34', GradientType=1);
   border: 1px solid transparent;
   color: #ffffff;
-  -webkit-text-stroke: #ffffff 1px;
-  /* Fix chrome font rendering */
   width: 300px;
   height: 300px;
 }
@@ -266,114 +277,114 @@ body {
   width: 302px;
   height: 302px;
   background-color: rgba(1, 1, 1, 0);
-  color: rgba(1, 1, 1, 0);
 }
 /* Build the Cube */
 /* Webkit */
 #cube .fronto {
-  -webkit-transform: translateZ(150px);
+  -webkit-transform: translate3d(0, 0, 150px);
 }
 #cube .backo {
-  -webkit-transform: rotateY(180deg) translateZ(150px);
+  -webkit-transform: rotate3d(0, 1, 0, 180deg) translate3d(0, 0, 150px);
 }
 #cube .righto {
-  -webkit-transform: rotateY(90deg) translateZ(150px);
+  -webkit-transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, 150px);
 }
 #cube .lefto {
-  -webkit-transform: rotateY(-90deg) translateZ(150px);
+  -webkit-transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, 150px);
 }
 #cube .fronti {
-  -webkit-transform: rotateY(180deg) translateZ(-149px) translateX(-1px);
+  -webkit-transform: rotate3d(0, 1, 0, 180deg) translate3d(-1px, 0, -149px);
 }
 #cube .backi {
-  -webkit-transform: translateZ(-149px) translateX(1px);
+  -webkit-transform: translate3d(1px, 0, -149px);
 }
 #cube .righti {
-  -webkit-transform: rotateY(-90deg) translateZ(-149px);
+  -webkit-transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, -149px);
 }
 #cube .lefti {
-  -webkit-transform: rotateY(90deg) translateZ(-149px);
+  -webkit-transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, -149px);
 }
 #cube .top {
-  -webkit-transform: rotateX(90deg) translateZ(150px);
+  -webkit-transform: rotate3d(1, 0, 0, 90deg) translate3d(0, 0, 150px);
 }
 #cube .bottom {
-  -webkit-transform: rotateX(-90deg) translateZ(150px);
+  -webkit-transform: rotate3d(1, 0, 0, -90deg) translate3d(0, 0, 150px);
 }
-/* IE */
 #cube .fronto {
-  -ms-transform: translateZ(150px);
+  -ms-transform: translate3d(0, 0, 150px);
 }
 #cube .backo {
-  -ms-transform: rotateY(180deg) translateZ(150px);
+  -ms-transform: rotate3d(0, 1, 0, 180deg) translate3d(0, 0, 150px);
 }
 #cube .righto {
-  -ms-transform: rotateY(90deg) translateZ(150px);
+  -ms-transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, 150px);
 }
 #cube .lefto {
-  -ms-transform: rotateY(-90deg) translateZ(150px);
+  -ms-transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, 150px);
 }
 #cube .fronti {
-  -ms-transform: rotateY(180deg) translateZ(-149px) translateX(-1px);
+  -ms-transform: rotate3d(0, 1, 0, 180deg) translate3d(-1px, 0, -149px);
 }
 #cube .backi {
-  -ms-transform: translateZ(-149px) translateX(1px);
+  -ms-transform: translate3d(1px, 0, -149px);
 }
 #cube .righti {
-  -ms-transform: rotateY(-90deg) translateZ(-149px);
+  -ms-transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, -149px);
 }
 #cube .lefti {
-  -ms-transform: rotateY(90deg) translateZ(-149px);
+  -ms-transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, -149px);
 }
 #cube .top {
-  -ms-transform: rotateX(90deg) translateZ(150px);
+  -ms-transform: rotate3d(1, 0, 0, 90deg) translate3d(0, 0, 150px);
 }
 #cube .bottom {
-  -ms-transform: rotateX(-90deg) translateZ(150px);
+  -ms-transform: rotate3d(1, 0, 0, -90deg) translate3d(0, 0, 150px);
 }
 /* Firefox + Future Browsers */
 #cube .fronto {
-  transform: translateZ(150px);
+  transform: translate3d(0, 0, 150px);
 }
 #cube .backo {
-  transform: rotateY(180deg) translateZ(150px);
+  transform: rotate3d(0, 1, 0, 180deg) translate3d(0, 0, 150px);
 }
 #cube .righto {
-  transform: rotateY(90deg) translateZ(150px);
+  transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, 150px);
 }
 #cube .lefto {
-  transform: rotateY(-90deg) translateZ(150px);
+  transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, 150px);
 }
 #cube .fronti {
-  transform: rotateY(180deg) translateZ(-149px) translateX(-1px);
+  transform: rotate3d(0, 1, 0, 180deg) translate3d(-1px, 0, -149px);
 }
 #cube .backi {
-  transform: translateZ(-149px) translateX(1px);
+  transform: translate3d(1px, 0, -149px);
 }
 #cube .righti {
-  transform: rotateY(-90deg) translateZ(-149px);
+  transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, -149px);
 }
 #cube .lefti {
-  transform: rotateY(90deg) translateZ(-149px);
+  transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, -149px);
 }
 #cube .top {
-  transform: rotateX(90deg) translateZ(150px);
+  transform: rotate3d(1, 0, 0, 90deg) translate3d(0, 0, 150px);
 }
 #cube .bottom {
-  transform: rotateX(-90deg) translateZ(150px);
+  transform: rotate3d(1, 0, 0, -90deg) translate3d(0, 0, 150px);
 }
 #cube {
-  -ms-transform: translateZ(-150px);
-  -webkit-transform: translateZ(-150px);
-  transform: translateZ(-150px);
+  -webkit-transform: translate3d(0, 0, -150px);
+  -ms-transform: translate3d(0, 0, -150px);
+  transform: translate3d(0, 0, -150px);
 }
 /* Text */
 figure .text {
+  display: table-cell;
   text-align: center;
   vertical-align: middle;
   padding-top: 10px;
-  font-size: 6em;
+  font-size: 5em;
   font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 #rightot {
   font-size: 5em;
